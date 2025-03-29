@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSEmployeeAttendance25.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace CSEmployeeAttendance25
 {
     static class Program
     {
+        public static LoginUserDTO loginUser;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

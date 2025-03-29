@@ -31,8 +31,8 @@
             this.menuStripMDI = new System.Windows.Forms.MenuStrip();
             this.mnuSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCompanyInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuUserAccount = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBiometricMachine = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuUserAccount = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuChangePassword = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEmployee = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAttendance = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,21 +77,24 @@
             this.mnuCompanyInfo.Name = "mnuCompanyInfo";
             this.mnuCompanyInfo.Size = new System.Drawing.Size(209, 26);
             this.mnuCompanyInfo.Text = "Company Info";
+            this.mnuCompanyInfo.Visible = false;
             this.mnuCompanyInfo.Click += new System.EventHandler(this.mnuCompanyInfo_Click);
-            // 
-            // mnuUserAccount
-            // 
-            this.mnuUserAccount.Name = "mnuUserAccount";
-            this.mnuUserAccount.Size = new System.Drawing.Size(209, 26);
-            this.mnuUserAccount.Text = "User Account";
-            this.mnuUserAccount.Click += new System.EventHandler(this.mnuUserAccount_Click);
             // 
             // mnuBiometricMachine
             // 
             this.mnuBiometricMachine.Name = "mnuBiometricMachine";
             this.mnuBiometricMachine.Size = new System.Drawing.Size(209, 26);
             this.mnuBiometricMachine.Text = "Biometric Machine";
+            this.mnuBiometricMachine.Visible = false;
             this.mnuBiometricMachine.Click += new System.EventHandler(this.mnuBiometricMachine_Click);
+            // 
+            // mnuUserAccount
+            // 
+            this.mnuUserAccount.Name = "mnuUserAccount";
+            this.mnuUserAccount.Size = new System.Drawing.Size(209, 26);
+            this.mnuUserAccount.Text = "User Account";
+            this.mnuUserAccount.Visible = false;
+            this.mnuUserAccount.Click += new System.EventHandler(this.mnuUserAccount_Click);
             // 
             // mnuChangePassword
             // 

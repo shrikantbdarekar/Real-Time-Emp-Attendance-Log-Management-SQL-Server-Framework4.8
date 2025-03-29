@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CSEmployeeAttendance25.Data
 {
-    public class LoginUsersDBHelper
+    public class LoginUserDBHelper
     {
         private DatabaseHelper _dbHelper;
 
-        public LoginUsersDBHelper()
+        public LoginUserDBHelper()
         {
             _dbHelper = new DatabaseHelper();
         }
@@ -103,6 +103,40 @@ namespace CSEmployeeAttendance25.Data
             SqlParameter[] parameters = { new SqlParameter("@UserId", userId) };
             return _dbHelper.ExecuteNonQuery(query, parameters) > 0;
         }
+
+        public LoginUserDTO AuthenticateUser(string username, string password)
+        {
+            string query = "SELECT * FROM LoginUsers WHERE UserName = @UserName";
+            SqlParameter[] parameters = { new SqlParameter("@UserName", username) };
+
+            DataTable dt = _dbHelper.ExecuteQuery(query, parameters);
+
+            if (dt.Rows.Count == 1)
+            {
+                DataRow row = dt.Rows[0];
+                string storedHash = row["PasswordHash"].ToString();
+
+                //if (VerifyPassword(password, storedHash))
+                if (password.Equals(storedHash))
+                {
+                    return new LoginUserDTO
+                    {
+                        UserId = Convert.ToInt64(row["UserId"]),
+                        UserName = row["UserName"].ToString(),
+                        Role = Convert.ToInt32(row["Role"]),
+                        IsActive = Convert.ToBoolean(row["IsActive"]),
+                        CreatedAt = Convert.ToDateTime(row["CreatedAt"])
+                    };
+                }
+            }
+
+            return null; // Login failed
+        }
+
+        //private bool VerifyPassword(string password, string storedHash)
+        //{
+        //    //return BCrypt.Net.BCrypt.Verify(password, storedHash);
+        //}
     }
 
 }

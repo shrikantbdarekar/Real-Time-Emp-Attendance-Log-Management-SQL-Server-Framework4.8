@@ -32,9 +32,9 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -46,9 +46,9 @@
             this.panel1.Controls.Add(this.buttonExit);
             this.panel1.Controls.Add(this.buttonLogin);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.textBoxPassword);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.textBoxUserName);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 42);
@@ -86,12 +86,12 @@
             this.panel2.Size = new System.Drawing.Size(106, 109);
             this.panel2.TabIndex = 4;
             // 
-            // textBox2
+            // textBoxPassword
             // 
-            this.textBox2.Location = new System.Drawing.Point(242, 74);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(144, 24);
-            this.textBox2.TabIndex = 3;
+            this.textBoxPassword.Location = new System.Drawing.Point(242, 74);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.Size = new System.Drawing.Size(144, 24);
+            this.textBoxPassword.TabIndex = 3;
             // 
             // label2
             // 
@@ -102,12 +102,12 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Password";
             // 
-            // textBox1
+            // textBoxUserName
             // 
-            this.textBox1.Location = new System.Drawing.Point(242, 44);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(144, 24);
-            this.textBox1.TabIndex = 1;
+            this.textBoxUserName.Location = new System.Drawing.Point(242, 44);
+            this.textBoxUserName.Name = "textBoxUserName";
+            this.textBoxUserName.Size = new System.Drawing.Size(144, 24);
+            this.textBoxUserName.TabIndex = 1;
             // 
             // label1
             // 
@@ -157,9 +157,9 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxUserName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonLogin;

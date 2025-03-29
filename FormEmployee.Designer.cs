@@ -29,6 +29,16 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.numericHourlySalary = new System.Windows.Forms.NumericUpDown();
+            this.numericMonthlySalary = new System.Windows.Forms.NumericUpDown();
             this.checkBoxIsActive = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -62,20 +72,10 @@
             this.textBoxEmployeeCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.numericMonthlySalary = new System.Windows.Forms.NumericUpDown();
-            this.numericHourlySalary = new System.Windows.Forms.NumericUpDown();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMonthlySalary)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericHourlySalary)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMonthlySalary)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -130,9 +130,107 @@
             this.panel1.Size = new System.Drawing.Size(930, 258);
             this.panel1.TabIndex = 0;
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.ForeColor = System.Drawing.Color.Red;
+            this.label25.Location = new System.Drawing.Point(647, 177);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(14, 18);
+            this.label25.TabIndex = 46;
+            this.label25.Text = "*";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.ForeColor = System.Drawing.Color.Red;
+            this.label24.Location = new System.Drawing.Point(647, 147);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(14, 18);
+            this.label24.TabIndex = 45;
+            this.label24.Text = "*";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.ForeColor = System.Drawing.Color.Red;
+            this.label23.Location = new System.Drawing.Point(647, 87);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(14, 18);
+            this.label23.TabIndex = 44;
+            this.label23.Text = "*";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.ForeColor = System.Drawing.Color.Red;
+            this.label22.Location = new System.Drawing.Point(647, 117);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(14, 18);
+            this.label22.TabIndex = 43;
+            this.label22.Text = "*";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.ForeColor = System.Drawing.Color.Red;
+            this.label21.Location = new System.Drawing.Point(18, 177);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(14, 18);
+            this.label21.TabIndex = 42;
+            this.label21.Text = "*";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.Color.Red;
+            this.label20.Location = new System.Drawing.Point(18, 87);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(14, 18);
+            this.label20.TabIndex = 41;
+            this.label20.Text = "*";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.ForeColor = System.Drawing.Color.Red;
+            this.label19.Location = new System.Drawing.Point(18, 57);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(14, 18);
+            this.label19.TabIndex = 40;
+            this.label19.Text = "*";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.ForeColor = System.Drawing.Color.Red;
+            this.label18.Location = new System.Drawing.Point(18, 27);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(14, 18);
+            this.label18.TabIndex = 39;
+            this.label18.Text = "*";
+            // 
+            // numericHourlySalary
+            // 
+            this.numericHourlySalary.Location = new System.Drawing.Point(781, 114);
+            this.numericHourlySalary.Name = "numericHourlySalary";
+            this.numericHourlySalary.Size = new System.Drawing.Size(120, 24);
+            this.numericHourlySalary.TabIndex = 12;
+            this.numericHourlySalary.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // numericMonthlySalary
+            // 
+            this.numericMonthlySalary.Location = new System.Drawing.Point(781, 84);
+            this.numericMonthlySalary.Name = "numericMonthlySalary";
+            this.numericMonthlySalary.Size = new System.Drawing.Size(120, 24);
+            this.numericMonthlySalary.TabIndex = 11;
+            this.numericMonthlySalary.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // checkBoxIsActive
             // 
             this.checkBoxIsActive.AutoSize = true;
+            this.checkBoxIsActive.Checked = true;
+            this.checkBoxIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxIsActive.Location = new System.Drawing.Point(469, 219);
             this.checkBoxIsActive.Name = "checkBoxIsActive";
             this.checkBoxIsActive.Size = new System.Drawing.Size(81, 22);
@@ -414,102 +512,6 @@
             this.label6.Text = "Employee";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // numericMonthlySalary
-            // 
-            this.numericMonthlySalary.Location = new System.Drawing.Point(781, 84);
-            this.numericMonthlySalary.Name = "numericMonthlySalary";
-            this.numericMonthlySalary.Size = new System.Drawing.Size(120, 24);
-            this.numericMonthlySalary.TabIndex = 11;
-            this.numericMonthlySalary.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // numericHourlySalary
-            // 
-            this.numericHourlySalary.Location = new System.Drawing.Point(781, 114);
-            this.numericHourlySalary.Name = "numericHourlySalary";
-            this.numericHourlySalary.Size = new System.Drawing.Size(120, 24);
-            this.numericHourlySalary.TabIndex = 12;
-            this.numericHourlySalary.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.ForeColor = System.Drawing.Color.Red;
-            this.label18.Location = new System.Drawing.Point(18, 27);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(14, 18);
-            this.label18.TabIndex = 39;
-            this.label18.Text = "*";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.ForeColor = System.Drawing.Color.Red;
-            this.label19.Location = new System.Drawing.Point(18, 57);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(14, 18);
-            this.label19.TabIndex = 40;
-            this.label19.Text = "*";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.ForeColor = System.Drawing.Color.Red;
-            this.label20.Location = new System.Drawing.Point(18, 87);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(14, 18);
-            this.label20.TabIndex = 41;
-            this.label20.Text = "*";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.ForeColor = System.Drawing.Color.Red;
-            this.label21.Location = new System.Drawing.Point(18, 177);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(14, 18);
-            this.label21.TabIndex = 42;
-            this.label21.Text = "*";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.ForeColor = System.Drawing.Color.Red;
-            this.label22.Location = new System.Drawing.Point(647, 117);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(14, 18);
-            this.label22.TabIndex = 43;
-            this.label22.Text = "*";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.ForeColor = System.Drawing.Color.Red;
-            this.label23.Location = new System.Drawing.Point(647, 87);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(14, 18);
-            this.label23.TabIndex = 44;
-            this.label23.Text = "*";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.ForeColor = System.Drawing.Color.Red;
-            this.label24.Location = new System.Drawing.Point(647, 147);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(14, 18);
-            this.label24.TabIndex = 45;
-            this.label24.Text = "*";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.ForeColor = System.Drawing.Color.Red;
-            this.label25.Location = new System.Drawing.Point(647, 177);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(14, 18);
-            this.label25.TabIndex = 46;
-            this.label25.Text = "*";
-            // 
             // buttonClose
             // 
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -542,8 +544,8 @@
             this.Load += new System.EventHandler(this.FormEmployee_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMonthlySalary)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericHourlySalary)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMonthlySalary)).EndInit();
             this.ResumeLayout(false);
 
         }

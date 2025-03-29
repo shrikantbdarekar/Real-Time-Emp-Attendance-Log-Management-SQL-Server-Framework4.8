@@ -1,4 +1,5 @@
-﻿using CSEmployeeAttendance25.Reports;
+﻿using CSEmployeeAttendance25.Data;
+using CSEmployeeAttendance25.Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,17 @@ namespace CSEmployeeAttendance25
         public FormMDI()
         {
             InitializeComponent();
+
+            if (Program.loginUser.Role == (int)enumMyUserRoles.SuperAdmin)
+            {
+                mnuCompanyInfo.Visible = true;
+                mnuUserAccount.Visible = true;
+                mnuBiometricMachine.Visible = true;
+            }
+            else if (Program.loginUser.Role == (int)enumMyUserRoles.Admin)
+            {
+                mnuUserAccount.Visible = true;
+            }
         }
 
         private void FormMDI_Load(object sender, EventArgs e)
@@ -37,8 +49,8 @@ namespace CSEmployeeAttendance25
 
         private void mnuUserAccount_Click(object sender, EventArgs e)
         {
-            FormUserAccount formUserAccount = new FormUserAccount();
-            formUserAccount.ShowDialog();
+            FormUserAccountList formUserAccountList = new FormUserAccountList();
+            formUserAccountList.ShowDialog();
         }
 
         private void mnuChangePassword_Click(object sender, EventArgs e)

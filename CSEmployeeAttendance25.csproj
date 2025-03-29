@@ -56,6 +56,7 @@
     <Compile Include="Data\BiometricLogDBHelper.cs" />
     <Compile Include="Data\BiometricMachineDTO.cs" />
     <Compile Include="Data\BiometricMachineDBHelper.cs" />
+    <Compile Include="Data\CommonClasses.cs" />
     <Compile Include="Data\CompanyInfoDBHelper.cs" />
     <Compile Include="Data\CompanyInfoDTO.cs" />
     <Compile Include="Data\DatabaseHelper.cs" />
@@ -63,6 +64,12 @@
     <Compile Include="Data\EmployeeDBHelper.cs" />
     <Compile Include="Data\LoginUserDTO.cs" />
     <Compile Include="Data\LoginUserDBHelper.cs" />
+    <Compile Include="FormUserAccountList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUserAccountList.Designer.cs">
+      <DependentUpon>FormUserAccountList.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCalculateSalary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +162,9 @@
     <Compile Include="Reports\FormReportViewer.Designer.cs">
       <DependentUpon>FormReportViewer.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormUserAccountList.resx">
+      <DependentUpon>FormUserAccountList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCalculateSalary.resx">
       <DependentUpon>FormCalculateSalary.cs</DependentUpon>
     </EmbeddedResource>
