@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBoxBMMachineId = new System.Windows.Forms.TextBox();
+            this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxMachineName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -44,13 +44,13 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.textBox4);
+            this.panel1.Controls.Add(this.textBoxBMMachineId);
+            this.panel1.Controls.Add(this.textBoxDescription);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.buttonExit);
             this.panel1.Controls.Add(this.buttonLogin);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.textBoxMachineName);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 42);
@@ -59,19 +59,19 @@
             this.panel1.Size = new System.Drawing.Size(431, 163);
             this.panel1.TabIndex = 0;
             // 
-            // textBox2
+            // textBoxBMMachineId
             // 
-            this.textBox2.Location = new System.Drawing.Point(172, 54);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(219, 24);
-            this.textBox2.TabIndex = 9;
+            this.textBoxBMMachineId.Location = new System.Drawing.Point(172, 54);
+            this.textBoxBMMachineId.Name = "textBoxBMMachineId";
+            this.textBoxBMMachineId.Size = new System.Drawing.Size(219, 24);
+            this.textBoxBMMachineId.TabIndex = 9;
             // 
-            // textBox4
+            // textBoxDescription
             // 
-            this.textBox4.Location = new System.Drawing.Point(172, 86);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(219, 24);
-            this.textBox4.TabIndex = 8;
+            this.textBoxDescription.Location = new System.Drawing.Point(172, 86);
+            this.textBoxDescription.Name = "textBoxDescription";
+            this.textBoxDescription.Size = new System.Drawing.Size(219, 24);
+            this.textBoxDescription.TabIndex = 8;
             // 
             // label4
             // 
@@ -113,12 +113,12 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "BM Id";
             // 
-            // textBox1
+            // textBoxMachineName
             // 
-            this.textBox1.Location = new System.Drawing.Point(172, 24);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(219, 24);
-            this.textBox1.TabIndex = 1;
+            this.textBoxMachineName.Location = new System.Drawing.Point(172, 24);
+            this.textBoxMachineName.Name = "textBoxMachineName";
+            this.textBoxMachineName.Size = new System.Drawing.Size(219, 24);
+            this.textBoxMachineName.TabIndex = 1;
             // 
             // label1
             // 
@@ -157,7 +157,7 @@
             this.MinimizeBox = false;
             this.Name = "FormBiometricMachine";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.FormCompanyInfo_Load);
+            this.Load += new System.EventHandler(this.FormBiometricMachine_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -168,14 +168,14 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxMachineName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonLogin;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxBMMachineId;
     }
 }
 

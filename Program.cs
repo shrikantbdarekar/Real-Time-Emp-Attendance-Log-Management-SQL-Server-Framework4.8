@@ -17,11 +17,16 @@ namespace CSEmployeeAttendance25
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            FormSplachFullScreen formSplachFullScreen = new FormSplachFullScreen();
+            formSplachFullScreen.Show();
+
             FormLogin formLogin = new FormLogin();
             formLogin.ShowDialog();
 
             if (formLogin.DialogResult == DialogResult.OK)
             {
+                formSplachFullScreen.Close();
+
                 FormMDI formMDI = new FormMDI();
                 formMDI.ShowDialog();
                 

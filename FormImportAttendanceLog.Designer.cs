@@ -56,6 +56,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -339,6 +340,17 @@
             this.label3.Text = "Import Attendance Log";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // buttonClose
+            // 
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonClose.ForeColor = System.Drawing.Color.Red;
+            this.buttonClose.Location = new System.Drawing.Point(947, 5);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(30, 30);
+            this.buttonClose.TabIndex = 40;
+            this.buttonClose.Text = "X";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            // 
             // FormImportAttendanceLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -346,6 +358,7 @@
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(984, 561);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label3);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -397,6 +410,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcHistoryStartDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcHistoryEndDate;
         private System.Windows.Forms.DataGridViewLinkColumn dgcHistoryViewDetails;
+        private System.Windows.Forms.Button buttonClose;
     }
 }
 

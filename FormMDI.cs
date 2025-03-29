@@ -31,8 +31,8 @@ namespace CSEmployeeAttendance25
 
         private void mnuBiometricMachine_Click(object sender, EventArgs e)
         {
-            FormBiometricMachine formBiometricMachine = new FormBiometricMachine();
-            formBiometricMachine.ShowDialog();
+            FormBiometricMachineList formBiometricMachineList = new FormBiometricMachineList();
+            formBiometricMachineList.ShowDialog();
         }
 
         private void mnuUserAccount_Click(object sender, EventArgs e)
@@ -49,8 +49,8 @@ namespace CSEmployeeAttendance25
 
         private void mnuEmployee_Click(object sender, EventArgs e)
         {
-            FormEmployee formEmployee = new FormEmployee();
-            formEmployee.ShowDialog();
+            FormEmployeeList formEmployeeList = new FormEmployeeList();
+            formEmployeeList.ShowDialog();
         }
 
         private void mnuImportAttendanceLog_Click(object sender, EventArgs e)
