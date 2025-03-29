@@ -64,6 +64,18 @@
     <Compile Include="Data\EmployeeDBHelper.cs" />
     <Compile Include="Data\LoginUserDTO.cs" />
     <Compile Include="Data\LoginUserDBHelper.cs" />
+    <Compile Include="FormAddLogManually.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddLogManually.Designer.cs">
+      <DependentUpon>FormAddLogManually.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSplash.Designer.cs">
+      <DependentUpon>FormSplash.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormUserAccountList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +174,12 @@
     <Compile Include="Reports\FormReportViewer.Designer.cs">
       <DependentUpon>FormReportViewer.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormAddLogManually.resx">
+      <DependentUpon>FormAddLogManually.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSplash.resx">
+      <DependentUpon>FormSplash.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormUserAccountList.resx">
       <DependentUpon>FormUserAccountList.cs</DependentUpon>
     </EmbeddedResource>
@@ -221,6 +239,11 @@
     <EmbeddedResource Include="Reports\FormReportViewer.resx">
       <DependentUpon>FormReportViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Database\EmBMAttendanceDB.bak" />
+    <None Include="DummyData\1_attlog.dat" />
+    <None Include="DummyData\1_StandardReport.xls" />
+    <None Include="DummyData\biometric_logs_jan.dat" />
+    <None Include="DummyData\biometric_log_jan.dat" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -240,11 +263,11 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="dev-help.txt" />
+    <Content Include="DummyData\dummy employee.txt" />
+    <Content Include="DummyData\dummy employees 40.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

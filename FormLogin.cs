@@ -66,5 +66,10 @@ namespace CSEmployeeAttendance25
         {
             this.DialogResult = DialogResult.Cancel;
         }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

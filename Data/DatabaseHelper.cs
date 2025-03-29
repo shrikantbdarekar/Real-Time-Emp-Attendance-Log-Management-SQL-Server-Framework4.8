@@ -11,6 +11,7 @@ namespace CSEmployeeAttendance25.Data
     public class DatabaseHelper
     {
         private readonly string _connectionString;
+        public string ConnectionString { get { return _connectionString; } } 
 
         public DatabaseHelper()
         {

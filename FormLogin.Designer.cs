@@ -37,6 +37,7 @@
             this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,6 +91,7 @@
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(242, 74);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(144, 24);
             this.textBoxPassword.TabIndex = 3;
             // 
@@ -130,6 +132,18 @@
             this.label3.Text = "Login";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // buttonClose
+            // 
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonClose.ForeColor = System.Drawing.Color.Red;
+            this.buttonClose.Location = new System.Drawing.Point(380, 6);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(30, 30);
+            this.buttonClose.TabIndex = 42;
+            this.buttonClose.Text = "X";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -137,6 +151,7 @@
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(416, 229);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label3);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -164,6 +179,7 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonClose;
     }
 }
 
