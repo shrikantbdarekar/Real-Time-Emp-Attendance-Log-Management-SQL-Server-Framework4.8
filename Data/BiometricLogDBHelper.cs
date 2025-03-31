@@ -4,12 +4,14 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Routing;
 
 namespace CSEmployeeAttendance25.Data
 {
@@ -88,6 +90,126 @@ namespace CSEmployeeAttendance25.Data
             return logs;
         }
 
+        public List<BiometricLogDTOWithEmployee> GetBiometricLogsForEmployeeMonthLog(DateTime startDate,DateTime endDate)
+        {
+            string query = @"SELECT E.EmployeeId, E.EmployeeCode, E.EmployeeName, E.HourlySalary, B.*  
+                 FROM BiometricLogs B JOIN Employees E ON B.BMEmployeeId = E.BMEmployeeId 
+                 WHERE B.PunchTime>=@StartDate AND B.PunchTime<=@EndDate
+                 ORDER BY B.PunchTime, B.BMEmployeeId;";
+
+            SqlParameter[] parameters = { 
+                new SqlParameter("@StartDate", startDate) ,
+                new SqlParameter("@EndDate", endDate),
+                //new SqlParameter("@EmployeeId", employeeId)
+            };
+            DataTable dt = _dbHelper.ExecuteQuery(query, parameters);
+            List<BiometricLogDTOWithEmployee> logs = new List<BiometricLogDTOWithEmployee>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                logs.Add(new BiometricLogDTOWithEmployee
+                {
+                    LogId = Convert.ToInt64(row["LogId"]),
+                    BMEmployeeId = Convert.ToInt32(row["BMEmployeeId"]),
+                    PunchTime = Convert.ToDateTime(row["PunchTime"]),
+                    DeviceId = Convert.ToInt32(row["DeviceId"]),
+                    PunchTypeFlag = Convert.ToInt32(row["PunchTypeFlag"]),
+                    VerificationMode = Convert.ToInt32(row["VerificationMode"]),
+                    StatusCode = Convert.ToInt32(row["StatusCode"]),
+                    CreatedAt = Convert.ToDateTime(row["CreatedAt"]),
+                    RecordType = row["RecordType"].ToString(),
+                    BatchCode = row["BatchCode"].ToString(),
+                    StartDate = Convert.ToDateTime(row["StartDate"]),
+                    EndDate = Convert.ToDateTime(row["EndDate"]),
+                    InOut = row["InOut"].ToString(),
+                    ManualEntryRemark = row["ManualEntryRemark"].ToString(),
+
+                    EmployeeId = Convert.ToInt64(row["EmployeeId"]),
+                    EmployeeCode = row["EmployeeCode"].ToString(),
+                    EmployeeName = row["EmployeeName"].ToString()
+                });
+            }
+            return logs;
+        }
+
+        public List<BiometricLogDTOEmployeeMonthHour> GetBiometricLogsForEmployeeMonthHour(DateTime startDate, DateTime endDate)
+        {
+            string query = @"SELECT 
+                E.EmployeeId,
+                E.EmployeeCode,
+                E.EmployeeName,
+                E.HourlySalary,
+                B.BMEmployeeId,
+                CONVERT(DATE, B.PunchTime) AS PunchDate,
+
+                -- InTime in 24-hour format
+                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END) AS InTime,
+                -- InTime in 12-hour format
+                FORMAT(MAX(CASE WHEN B.InOut = 'IN' THEN B.PunchTime END), 'hh:mm tt') AS InTime12Hr,
+
+                -- OutTime in 24-hour format
+                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END) AS OutTime,
+                -- OutTime in 12-hour format
+                FORMAT(MAX(CASE WHEN B.InOut = 'OUT' THEN B.PunchTime END), 'hh:mm tt') AS OutTime12Hr,
+
+                -- Calculate DayHours (HH:MM format)
+                FORMAT(DATEDIFF(MINUTE, 
+                    MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                    MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                ) / 60, '00') + ':' +
+                FORMAT(DATEDIFF(MINUTE, 
+                    MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                    MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                ) % 60, '00') AS DayHours,
+
+               -- Calculate DaySalary with exactly 2 decimal places
+                CAST(ROUND(
+                    CAST(DATEDIFF(MINUTE, 
+                        MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                        MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                    ) AS DECIMAL(10,2)) / 60 * E.HourlySalary, 
+                    2
+                ) AS DECIMAL(10,2)) AS DaySalary
+
+            FROM BiometricLogs B
+            JOIN Employees E ON B.BMEmployeeId = E.BMEmployeeId
+            WHERE B.InOut <> '' 
+            AND B.PunchTime >= @StartDate 
+            AND B.PunchTime <= @EndDate
+            GROUP BY E.EmployeeId, E.EmployeeCode, E.EmployeeName, E.HourlySalary, B.BMEmployeeId, CONVERT(DATE, B.PunchTime);";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@StartDate", startDate) ,
+                new SqlParameter("@EndDate", endDate),
+                //new SqlParameter("@EmployeeId", employeeId)
+            };
+            DataTable dt = _dbHelper.ExecuteQuery(query, parameters);
+            List<BiometricLogDTOEmployeeMonthHour> logs = new List<BiometricLogDTOEmployeeMonthHour>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                logs.Add(new BiometricLogDTOEmployeeMonthHour
+                {
+                    EmployeeId = Convert.ToInt64(row["EmployeeId"]),
+                    EmployeeCode = row["EmployeeCode"] as string ?? "",
+                    EmployeeName = row["EmployeeName"] as string ?? "",
+                    BMEmployeeId = Convert.ToInt32(row["BMEmployeeId"]),
+                    PunchDate = Convert.ToDateTime(row["PunchDate"]),
+                    // Convert time to TimeSpan safely (handles NULL values)
+                    InTime = TimeSpan.TryParse(row["InTime"]?.ToString(), out TimeSpan inTimeValue) ? inTimeValue : (TimeSpan?)null,
+                    OutTime = TimeSpan.TryParse(row["OutTime"]?.ToString(), out TimeSpan outTimeValue) ? outTimeValue : (TimeSpan?)null,
+                    // Convert 12-hour format time safely
+                    InTime12Hr = row["InTime12Hr"] as string ?? "",
+                    OutTime12Hr = row["OutTime12Hr"] as string ?? "",
+
+                    DayHours = row["DayHours"] as string ?? "",
+                    HourSalary = Convert.ToDecimal(row["HourlySalary"].ToString()),
+                    DaySalary = Convert.ToDecimal(row["DaySalary"].ToString())
+                });
+            }
+            return logs;
+        }
+
         public List<BiometricLogDTOWithEmployee> GetBiometricLogsWithEmployeeOneEntry(string batchCode)
         {
             string query = @"WITH PunchCounts AS (
@@ -133,7 +255,6 @@ namespace CSEmployeeAttendance25.Data
             }
             return logs;
         }
-
 
         public List<BiometricLogDTOWithEmployee> GetBiometricLogsWithEmployeeTwoPlusEntry(string batchCode)
         {
@@ -254,10 +375,40 @@ namespace CSEmployeeAttendance25.Data
             return _dbHelper.ExecuteNonQuery(query, parameters) > 0;
         }
 
-        public DataTable GetDistinctBatchCodes()
+        // Get distinct BatchCodes where InOut flag process is pending
+        public DataTable GetDistinctBatchCodesWithInOut()
         {
-            string query = @"SELECT DISTINCT BatchCode, StartDate,CONCAT(BatchCode, ' #', FORMAT(StartDate, 'dd-MM-yyyy'), 
-            ' #', FORMAT(EndDate, 'dd-MM-yyyy')) AS BatchName FROM BiometricLogs ORDER BY StartDate DESC;";
+            string query = @"SELECT DISTINCT BatchCode, StartDate,
+                CONCAT(BatchCode, ' #', FORMAT(StartDate, 'dd-MM-yyyy'), ' #', FORMAT(EndDate, 'dd-MM-yyyy')) AS BatchName 
+                FROM BiometricLogs 
+                Where InOut!=''
+                ORDER BY StartDate DESC";
+            return _dbHelper.ExecuteQuery(query, null);
+        }
+
+        // Get distinct BatchCodes where InOut flag process is complete
+        public DataTable GetDistinctBatchCodesWithoutInOut()
+        {
+            string query = @"SELECT DISTINCT BatchCode, StartDate,
+                CONCAT(BatchCode, ' #', FORMAT(StartDate, 'dd-MM-yyyy'), ' #', FORMAT(EndDate, 'dd-MM-yyyy')) AS BatchName 
+                FROM BiometricLogs 
+                Where InOut=''
+                ORDER BY StartDate DESC";
+            return _dbHelper.ExecuteQuery(query, null);
+        }
+
+        // Get distinct BatchCodes both InOut flag process is pending and complete
+        public DataTable GetDistinctBatchCodesAll()
+        {
+            string query = @"SELECT DISTINCT BatchCode, StartDate,
+                CONCAT(BatchCode, ' #', FORMAT(StartDate, 'dd-MM-yyyy'), ' #', FORMAT(EndDate, 'dd-MM-yyyy')) AS BatchName,
+                -- New column: Status based on InOut field
+                CASE 
+                    WHEN InOut = '' THEN 'InOut-PENDING'
+                    ELSE 'InOut-PROCESSED'
+                END AS Status
+            FROM BiometricLogs
+            ORDER BY StartDate DESC;";
             return _dbHelper.ExecuteQuery(query, null);
         }
 

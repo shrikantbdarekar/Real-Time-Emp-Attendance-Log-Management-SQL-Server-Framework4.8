@@ -35,5 +35,18 @@ namespace CSEmployeeAttendance25.Properties {
                 this["ConnectionString"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=wish.grabweb.in,5422;Initial Catalog=dbX9Y7AB23T4Z2P6W5V;User ID=dbX9" +
+            "Y7ABSCS;Password=Password@1234#$;")]
+        public string ConnectionLive {
+            get {
+                return ((string)(this["ConnectionLive"]));
+            }
+            set {
+                this["ConnectionLive"] = value;
+            }
+        }
     }
 }

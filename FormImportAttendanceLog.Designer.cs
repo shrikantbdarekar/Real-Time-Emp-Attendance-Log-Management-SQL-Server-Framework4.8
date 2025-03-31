@@ -57,6 +57,7 @@
             this.dgcHistoryStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcHistoryEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcHistoryBatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcBatchInOutStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcHistoryViewDetails = new System.Windows.Forms.DataGridViewLinkColumn();
             this.dgcHistoryDeleteDetails = new System.Windows.Forms.DataGridViewLinkColumn();
             this.panel1.SuspendLayout();
@@ -211,6 +212,7 @@
             this.dgcHistoryStartDate,
             this.dgcHistoryEndDate,
             this.dgcHistoryBatchName,
+            this.dgcBatchInOutStatus,
             this.dgcHistoryViewDetails,
             this.dgcHistoryDeleteDetails});
             this.dgvBatchHistory.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -375,7 +377,15 @@
             this.dgcHistoryBatchName.HeaderText = "Batch Details";
             this.dgcHistoryBatchName.Name = "dgcHistoryBatchName";
             this.dgcHistoryBatchName.ReadOnly = true;
-            this.dgcHistoryBatchName.Width = 500;
+            this.dgcHistoryBatchName.Width = 360;
+            // 
+            // dgcBatchInOutStatus
+            // 
+            this.dgcBatchInOutStatus.DataPropertyName = "Status";
+            this.dgcBatchInOutStatus.HeaderText = "Status";
+            this.dgcBatchInOutStatus.Name = "dgcBatchInOutStatus";
+            this.dgcBatchInOutStatus.ReadOnly = true;
+            this.dgcBatchInOutStatus.Width = 160;
             // 
             // dgcHistoryViewDetails
             // 
@@ -458,6 +468,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcHistoryStartDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcHistoryEndDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcHistoryBatchName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgcBatchInOutStatus;
         private System.Windows.Forms.DataGridViewLinkColumn dgcHistoryViewDetails;
         private System.Windows.Forms.DataGridViewLinkColumn dgcHistoryDeleteDetails;
     }

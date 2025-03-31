@@ -16,6 +16,7 @@ namespace CSEmployeeAttendance25.Data
         public DatabaseHelper()
         {
             _connectionString = Properties.Settings.Default.ConnectionString;
+            //_connectionString = Properties.Settings.Default.ConnectionLive;
         }
 
         // Execute a command (INSERT, UPDATE, DELETE) - Returns rows affected

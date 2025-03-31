@@ -17,6 +17,9 @@ namespace CSEmployeeAttendance25.Data
         public DateTime CreatedAt { get; set; }
         public TimeSpan ShiftStart { get; set; }
         public TimeSpan ShiftEnd { get; set; }
+
+        // Expected in minutes
+        public int PunchTimeSpan { get; set; }
     }
 
 }

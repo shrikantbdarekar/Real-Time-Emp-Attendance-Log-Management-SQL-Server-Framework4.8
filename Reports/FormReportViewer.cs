@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using CSEmployeeAttendance25.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,9 +19,19 @@ namespace CSEmployeeAttendance25.Reports
             InitializeComponent();
         }
 
+        public FormReportViewer(List<BiometricLogDTOEmployeeMonthHour> rptSource)
+        {
+            InitializeComponent();
+
+            ReportDocument rptDoc = new CrystalReportTest();
+            rptDoc.SetDataSource(DataTableHelper.ConvertToDataTable(rptSource));
+            crystalReportViewer1.ReportSource = rptDoc;
+
+            Application.DoEvents();
+        }
+
         private void FormReportViewer_Load(object sender, EventArgs e)
         {
-            crystalReportViewer1.ReportSource = new CrystalReportTest();
         }
     }
 }

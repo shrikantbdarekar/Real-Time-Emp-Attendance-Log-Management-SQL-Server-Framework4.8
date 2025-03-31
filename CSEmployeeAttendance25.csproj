@@ -60,6 +60,7 @@
     <Compile Include="Data\CompanyInfoDBHelper.cs" />
     <Compile Include="Data\CompanyInfoDTO.cs" />
     <Compile Include="Data\DatabaseHelper.cs" />
+    <Compile Include="Data\DataTableHelper.cs" />
     <Compile Include="Data\EmployeeDTO.cs" />
     <Compile Include="Data\EmployeeDBHelper.cs" />
     <Compile Include="Data\LoginUserDTO.cs" />
@@ -82,11 +83,11 @@
     <Compile Include="FormUserAccountList.Designer.cs">
       <DependentUpon>FormUserAccountList.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormCalculateSalary.cs">
+    <Compile Include="FormMonthHours.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCalculateSalary.Designer.cs">
-      <DependentUpon>FormCalculateSalary.cs</DependentUpon>
+    <Compile Include="FormMonthHours.Designer.cs">
+      <DependentUpon>FormMonthHours.cs</DependentUpon>
     </Compile>
     <Compile Include="FormBiometricMachineList.cs">
       <SubType>Form</SubType>
@@ -168,12 +169,18 @@
       <DependentUpon>CrystalReportTest.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\DataSetAttendance.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetAttendance.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\FormReportViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\FormReportViewer.Designer.cs">
       <DependentUpon>FormReportViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="StringEncryptor.cs" />
     <EmbeddedResource Include="FormAddLogManually.resx">
       <DependentUpon>FormAddLogManually.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,8 +190,8 @@
     <EmbeddedResource Include="FormUserAccountList.resx">
       <DependentUpon>FormUserAccountList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormCalculateSalary.resx">
-      <DependentUpon>FormCalculateSalary.cs</DependentUpon>
+    <EmbeddedResource Include="FormMonthHours.resx">
+      <DependentUpon>FormMonthHours.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBiometricMachineList.resx">
       <DependentUpon>FormBiometricMachineList.cs</DependentUpon>
@@ -258,6 +265,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reports\DataSetAttendance.xsc">
+      <DependentUpon>DataSetAttendance.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSetAttendance.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetAttendance.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\DataSetAttendance.xss">
+      <DependentUpon>DataSetAttendance.xsd</DependentUpon>
+    </None>
     <None Include="Resources\thumb.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +286,7 @@
     <Content Include="dev-help.txt" />
     <Content Include="DummyData\dummy employee.txt" />
     <Content Include="DummyData\dummy employees 40.sql" />
+    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

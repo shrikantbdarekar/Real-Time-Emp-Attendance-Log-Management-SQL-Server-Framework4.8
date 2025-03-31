@@ -45,7 +45,7 @@ namespace CSEmployeeAttendance25
 
         private void LoadBatchHistory()
         {
-            DataTable batchCodesTable = _biometricLogHelper.GetDistinctBatchCodes();
+            DataTable batchCodesTable = _biometricLogHelper.GetDistinctBatchCodesAll();
 
             dgvBatchHistory.DataSource = batchCodesTable;
             dgvBiometricLogs.DataSource = null;

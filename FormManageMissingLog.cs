@@ -41,7 +41,7 @@ namespace CSEmployeeAttendance25
 
         private void LoadBatchCode()
         {
-            DataTable batchCodesTable = _biometricLogHelper.GetDistinctBatchCodes();
+            DataTable batchCodesTable = _biometricLogHelper.GetDistinctBatchCodesWithoutInOut();
 
             comboBoxBatchCode.DataSource = batchCodesTable;
             comboBoxBatchCode.DisplayMember = "BatchName";

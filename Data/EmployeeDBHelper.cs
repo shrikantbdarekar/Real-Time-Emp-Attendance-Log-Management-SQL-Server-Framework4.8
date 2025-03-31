@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace CSEmployeeAttendance25.Data
 {
@@ -21,6 +22,7 @@ namespace CSEmployeeAttendance25.Data
         public List<EmployeeDTO> GetEmployees()
         {
             string query = "SELECT * FROM Employees";
+
             DataTable dt = _dbHelper.ExecuteQuery(query, null);
             List<EmployeeDTO> employees = new List<EmployeeDTO>();
 
@@ -46,6 +48,93 @@ namespace CSEmployeeAttendance25.Data
                     ShiftEnd = (TimeSpan)row["ShiftEnd"],
                     IsActive = Convert.ToBoolean(row["IsActive"]),
                     CreatedAt = Convert.ToDateTime(row["CreatedAt"])
+                });
+            }
+            return employees;
+        }
+
+        public List<EmployeeDTO> GetEmployees(DateTime startDate,DateTime endDate)
+        {
+            string query = @"select * from Employees where BMEmployeeId in 
+                (select distinct bmemployeeid from BiometricLogs B where
+                B.PunchTime>=@StartDate AND B.PunchTime<=@EndDate)";
+
+            DataTable dt = _dbHelper.ExecuteQuery(query, null);
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                employees.Add(new EmployeeDTO
+                {
+                    EmployeeId = Convert.ToInt64(row["EmployeeId"]),
+                    EmployeeCode = row["EmployeeCode"].ToString(),
+                    BMEmployeeId = Convert.ToInt32(row["BMEmployeeId"]),
+                    JoiningDate = Convert.ToDateTime(row["JoiningDate"]),
+                    BirthDate = Convert.ToDateTime(row["BirthDate"]),
+                    EmployeeName = row["EmployeeName"].ToString(),
+                    Address = row["Address"].ToString(),
+                    EmailId = row["EmailId"].ToString(),
+                    ContactNumber1 = row["ContactNumber1"].ToString(),
+                    ContactNumber2 = row["ContactNumber2"].ToString(),
+                    Department = row["Department"].ToString(),
+                    Designation = row["Designation"].ToString(),
+                    MonthlySalary = Convert.ToDecimal(row["MonthlySalary"]),
+                    HourlySalary = Convert.ToDecimal(row["HourlySalary"]),
+                    ShiftStart = (TimeSpan)row["ShiftStart"],
+                    ShiftEnd = (TimeSpan)row["ShiftEnd"],
+                    IsActive = Convert.ToBoolean(row["IsActive"]),
+                    CreatedAt = Convert.ToDateTime(row["CreatedAt"])
+                });
+            }
+            return employees;
+        }
+
+        // Get All Employees
+        public List<EmployeeDTO> GetEmployeesDropdown()
+        {
+            string query = "SELECT * FROM Employees Order By BMEmployeeId;";
+            DataTable dt = _dbHelper.ExecuteQuery(query, null);
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                employees.Add(new EmployeeDTO
+                {
+                    EmployeeId = Convert.ToInt64(row["EmployeeId"]),
+                    EmployeeCode = row["EmployeeCode"].ToString(),
+                    BMEmployeeId = Convert.ToInt32(row["BMEmployeeId"]),
+                    EmployeeName = Convert.ToInt32(row["BMEmployeeId"]) + " | " + row["EmployeeCode"].ToString() + " " + row["EmployeeName"].ToString() ,
+                });
+            }
+            return employees;
+        }
+
+        // Get All Employees
+        public List<EmployeeDTO> GetEmployeesDropdown(DateTime startDate,DateTime endDate)
+        {
+            string query = @"select * from Employees where BMEmployeeId in 
+                (select distinct bmemployeeid from BiometricLogs B where
+                B.PunchTime>=@StartDate AND B.PunchTime<=@EndDate)
+                Order By BMEmployeeId";
+
+
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate),
+            };
+
+            DataTable dt = _dbHelper.ExecuteQuery(query, parameters);
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                employees.Add(new EmployeeDTO
+                {
+                    EmployeeId = Convert.ToInt64(row["EmployeeId"]),
+                    EmployeeCode = row["EmployeeCode"].ToString(),
+                    BMEmployeeId = Convert.ToInt32(row["BMEmployeeId"]),
+                    EmployeeName = Convert.ToInt32(row["BMEmployeeId"]) + " | " + row["EmployeeCode"].ToString() + " " + row["EmployeeName"].ToString(),
                 });
             }
             return employees;

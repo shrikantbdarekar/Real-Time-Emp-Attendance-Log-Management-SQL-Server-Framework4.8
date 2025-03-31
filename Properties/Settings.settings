@@ -6,5 +6,8 @@
       <Value Profile="(Default)">Server=.\SQLEXPRESS22;Database=EmBMAttendanceDB;Trusted_Connection=True;TrustServerCertificate=True;
 </Value>
     </Setting>
+    <Setting Name="ConnectionLive" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=wish.grabweb.in,5422;Initial Catalog=dbX9Y7AB23T4Z2P6W5V;User ID=dbX9Y7ABSCS;Password=Password@1234#$;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

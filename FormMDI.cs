@@ -77,9 +77,9 @@ namespace CSEmployeeAttendance25
             formManageMissingLog.ShowDialog();
         }
 
-        private void mnuCalculateSalary_Click(object sender, EventArgs e)
+        private void mnuMonthHours_Click(object sender, EventArgs e)
         {
-            FormCalculateSalary formCalculateSalary = new FormCalculateSalary();
+            FormMonthHours formCalculateSalary = new FormMonthHours();
             formCalculateSalary.ShowDialog();
         }
 
