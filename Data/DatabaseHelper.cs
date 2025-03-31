@@ -19,6 +19,17 @@ namespace CSEmployeeAttendance25.Data
             //_connectionString = Properties.Settings.Default.ConnectionLive;
         }
 
+        public bool IsValidConnection()
+        {
+            bool isValid = false;
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                con.Open();
+                isValid = true;
+            }
+            return isValid;
+        }
+
         // Execute a command (INSERT, UPDATE, DELETE) - Returns rows affected
         public int ExecuteNonQuery(string storedProcedure, SqlParameter[] parameters)
         {

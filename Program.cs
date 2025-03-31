@@ -10,6 +10,7 @@ namespace CSEmployeeAttendance25
     static class Program
     {
         public static LoginUserDTO loginUser;
+        public static CompanyInfoDTO companyInfo;
 
         /// <summary>
         /// The main entry point for the application.
@@ -19,6 +20,21 @@ namespace CSEmployeeAttendance25
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            DatabaseHelper databaseHelper = new DatabaseHelper();
+            if (!databaseHelper.IsValidConnection())
+            {
+                MessageBox.Show("Check database connection string!");
+                return;
+            }
+
+            CompanyInfoDBHelper companyInfoHelper = new CompanyInfoDBHelper();
+            companyInfo = companyInfoHelper.GetCompanyInfo();
+            if (companyInfo==null)
+            {
+                MessageBox.Show("Check compnay setting in database!");
+                return;
+            }
 
             FormSplachFullScreen formSplachFullScreen = new FormSplachFullScreen();
             formSplachFullScreen.Show();

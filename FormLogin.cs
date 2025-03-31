@@ -14,11 +14,13 @@ namespace CSEmployeeAttendance25
     public partial class FormLogin: Form
     {
         private LoginUserDBHelper _loginHelper;
+        private CompanyInfoDBHelper _companyInfoHelper;
         public FormLogin()
         {
             InitializeComponent();
 
             _loginHelper = new LoginUserDBHelper();
+            _companyInfoHelper = new CompanyInfoDBHelper();
         }
 
         private void FormLogin_Load(object sender, EventArgs e)

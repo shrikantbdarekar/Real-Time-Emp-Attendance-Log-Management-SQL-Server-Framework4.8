@@ -25,6 +25,13 @@ namespace CSEmployeeAttendance25.Reports
 
             ReportDocument rptDoc = new CrystalReportTest();
             rptDoc.SetDataSource(DataTableHelper.ConvertToDataTable(rptSource));
+
+            rptDoc.SetParameterValue("CompanyName", Program.companyInfo.CompanyName);
+            rptDoc.SetParameterValue("CompanyAddress", Program.companyInfo.CompanyAddress);
+            rptDoc.SetParameterValue("Email", Program.companyInfo.EmailId);
+            rptDoc.SetParameterValue("ContactNo", Program.companyInfo.ContactNo);
+            rptDoc.SetParameterValue("Website", Program.companyInfo.Website);
+
             crystalReportViewer1.ReportSource = rptDoc;
 
             Application.DoEvents();
