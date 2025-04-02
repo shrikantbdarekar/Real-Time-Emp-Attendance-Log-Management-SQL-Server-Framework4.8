@@ -1,4 +1,67 @@
-﻿dbX9Y7AB23T4Z2P6W5V
+﻿SELECT BL1.BMEmployeeId, BL1.PunchTime, BL1.InOut
+FROM BiometricLogs BL1
+JOIN BiometricLogs BL2 
+    ON BL1.BMEmployeeId = BL2.BMEmployeeId 
+    AND BL1.LogId <> BL2.LogId
+    AND ABS(DATEDIFF(MINUTE, BL1.PunchTime, BL2.PunchTime)) <= 15
+	AND BL1.InOut=''
+ORDER BY BL1.BMEmployeeId, BL1.PunchTime;
+########################
+WITH DuplicateLogs AS (
+    SELECT 
+        BL1.LogId, 
+        BL1.BMEmployeeId, 
+        BL1.PunchTime, 
+        BL1.InOut,
+        ROW_NUMBER() OVER (
+            PARTITION BY BL1.BMEmployeeId, CONVERT(DATE, BL1.PunchTime) -- Partition by Employee & Date
+            ORDER BY 
+                CASE 
+                    WHEN FORMAT(BL1.PunchTime, 'tt') = 'AM' THEN BL1.PunchTime -- Keep earliest in AM
+                    ELSE BL1.PunchTime DESC -- Keep latest in PM
+                END
+        ) AS RowNum
+    FROM BiometricLog BL1
+    JOIN BiometricLog BL2
+        ON BL1.BMEmployeeId = BL2.BMEmployeeId
+        AND BL1.LogId <> BL2.LogId
+        AND ABS(DATEDIFF(MINUTE, BL1.PunchTime, BL2.PunchTime)) <= 15
+)
+DELETE FROM BiometricLog 
+WHERE LogId IN (SELECT LogId FROM DuplicateLogs WHERE RowNum > 1);
+########################################
+WITH DuplicateLogs AS (
+    SELECT 
+        BL1.LogId, 
+        BL1.BMEmployeeId, 
+        BL1.PunchTime, 
+        BL1.InOut,
+        ROW_NUMBER() OVER (
+            PARTITION BY BL1.BMEmployeeId, CONVERT(DATE, BL1.PunchTime) -- Partition by Employee & Date
+            ORDER BY 
+                CASE 
+                    WHEN FORMAT(BL1.PunchTime, 'tt') = 'AM' THEN BL1.PunchTime -- Keep earliest in AM
+                    ELSE BL1.PunchTime DESC -- Keep latest in PM
+                END
+        ) AS RowNum
+    FROM BiometricLogs BL1
+    JOIN BiometricLogs BL2
+        ON BL1.BMEmployeeId = BL2.BMEmployeeId
+        AND BL1.LogId <> BL2.LogId
+        AND ABS(DATEDIFF(MINUTE, BL1.PunchTime, BL2.PunchTime)) <= 5
+)
+INSERT INTO DeleteLogs (LogId, BMEmployeeId, PunchTime, InOut)
+SELECT LogId, BMEmployeeId, PunchTime, InOut FROM DuplicateLogs WHERE RowNum > 1;
+
+DELETE FROM BiometricLogs WHERE LogId IN (SELECT LogId FROM DeleteLogs);
+#######################################################
+
+
+
+
+
+
+dbX9Y7AB23T4Z2P6W5V
 dbX9Y7ABSCS
 Password@1234#$
 

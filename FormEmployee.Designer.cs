@@ -212,7 +212,13 @@
             // 
             // numericHourlySalary
             // 
+            this.numericHourlySalary.DecimalPlaces = 2;
             this.numericHourlySalary.Location = new System.Drawing.Point(781, 114);
+            this.numericHourlySalary.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericHourlySalary.Name = "numericHourlySalary";
             this.numericHourlySalary.Size = new System.Drawing.Size(120, 24);
             this.numericHourlySalary.TabIndex = 12;
@@ -220,7 +226,13 @@
             // 
             // numericMonthlySalary
             // 
+            this.numericMonthlySalary.DecimalPlaces = 2;
             this.numericMonthlySalary.Location = new System.Drawing.Point(781, 84);
+            this.numericMonthlySalary.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericMonthlySalary.Name = "numericMonthlySalary";
             this.numericMonthlySalary.Size = new System.Drawing.Size(120, 24);
             this.numericMonthlySalary.TabIndex = 11;

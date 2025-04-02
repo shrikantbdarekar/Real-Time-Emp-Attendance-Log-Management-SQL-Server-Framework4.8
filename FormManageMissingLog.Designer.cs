@@ -34,15 +34,6 @@
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageAllRecords = new System.Windows.Forms.TabPage();
             this.dgvBiometricLogs = new System.Windows.Forms.DataGridView();
-            this.tabPageOneEntry = new System.Windows.Forms.TabPage();
-            this.dgvOneEntry = new System.Windows.Forms.DataGridView();
-            this.tabPageTwoPlusEntry = new System.Windows.Forms.TabPage();
-            this.dgvTwoPlusEntry = new System.Windows.Forms.DataGridView();
-            this.buttonLoadData = new System.Windows.Forms.Button();
-            this.buttonDeleteLog = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.buttonClose = new System.Windows.Forms.Button();
             this.dgcRawLogId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcRawEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcRawEmployeeCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +41,8 @@
             this.dgcRawBMEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcRawPunchTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcRawRowType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPageOneEntry = new System.Windows.Forms.TabPage();
+            this.dgvOneEntry = new System.Windows.Forms.DataGridView();
             this.dgcOneLogId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcOneEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcEmployeeCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +51,8 @@
             this.dgcPunchTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcOneRecordType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcOneAddLog = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.tabPageDuplicateEntry = new System.Windows.Forms.TabPage();
+            this.dgvTwoPlusEntry = new System.Windows.Forms.DataGridView();
             this.dgcTwoLogId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcTwoEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcTwoEmployeeCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,19 +61,26 @@
             this.dgcTwoPunchTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcTwoRecordType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgcTwoDelete = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.buttonLoadData = new System.Windows.Forms.Button();
+            this.buttonDeleteLog = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonAutoDeleteDuplicates = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageAllRecords.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBiometricLogs)).BeginInit();
             this.tabPageOneEntry.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOneEntry)).BeginInit();
-            this.tabPageTwoPlusEntry.SuspendLayout();
+            this.tabPageDuplicateEntry.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTwoPlusEntry)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panel1.Controls.Add(this.buttonAutoDeleteDuplicates);
             this.panel1.Controls.Add(this.comboBoxBatchCode);
             this.panel1.Controls.Add(this.buttonApplyInOut);
             this.panel1.Controls.Add(this.tabControlMain);
@@ -116,7 +118,7 @@
             // 
             this.tabControlMain.Controls.Add(this.tabPageAllRecords);
             this.tabControlMain.Controls.Add(this.tabPageOneEntry);
-            this.tabControlMain.Controls.Add(this.tabPageTwoPlusEntry);
+            this.tabControlMain.Controls.Add(this.tabPageDuplicateEntry);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tabControlMain.Location = new System.Drawing.Point(0, 47);
             this.tabControlMain.Name = "tabControlMain";
@@ -157,132 +159,6 @@
             this.dgvBiometricLogs.ReadOnly = true;
             this.dgvBiometricLogs.Size = new System.Drawing.Size(970, 435);
             this.dgvBiometricLogs.TabIndex = 0;
-            // 
-            // tabPageOneEntry
-            // 
-            this.tabPageOneEntry.Controls.Add(this.dgvOneEntry);
-            this.tabPageOneEntry.Location = new System.Drawing.Point(4, 27);
-            this.tabPageOneEntry.Name = "tabPageOneEntry";
-            this.tabPageOneEntry.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOneEntry.Size = new System.Drawing.Size(976, 441);
-            this.tabPageOneEntry.TabIndex = 1;
-            this.tabPageOneEntry.Text = "#One Entry     ";
-            this.tabPageOneEntry.UseVisualStyleBackColor = true;
-            // 
-            // dgvOneEntry
-            // 
-            this.dgvOneEntry.AllowUserToAddRows = false;
-            this.dgvOneEntry.AllowUserToDeleteRows = false;
-            this.dgvOneEntry.AllowUserToResizeColumns = false;
-            this.dgvOneEntry.AllowUserToResizeRows = false;
-            this.dgvOneEntry.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.dgvOneEntry.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOneEntry.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgcOneLogId,
-            this.dgcOneEmployeeId,
-            this.dgcEmployeeCode,
-            this.dgcOneEmployeeName,
-            this.dgcOneBMEmployeeId,
-            this.dgcPunchTime,
-            this.dgcOneRecordType,
-            this.dgcOneAddLog});
-            this.dgvOneEntry.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvOneEntry.Location = new System.Drawing.Point(3, 3);
-            this.dgvOneEntry.Name = "dgvOneEntry";
-            this.dgvOneEntry.ReadOnly = true;
-            this.dgvOneEntry.Size = new System.Drawing.Size(970, 435);
-            this.dgvOneEntry.TabIndex = 1;
-            this.dgvOneEntry.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOneEntry_CellContentClick);
-            // 
-            // tabPageTwoPlusEntry
-            // 
-            this.tabPageTwoPlusEntry.Controls.Add(this.dgvTwoPlusEntry);
-            this.tabPageTwoPlusEntry.Location = new System.Drawing.Point(4, 27);
-            this.tabPageTwoPlusEntry.Name = "tabPageTwoPlusEntry";
-            this.tabPageTwoPlusEntry.Size = new System.Drawing.Size(976, 441);
-            this.tabPageTwoPlusEntry.TabIndex = 2;
-            this.tabPageTwoPlusEntry.Text = "#Two Plus Entry     ";
-            this.tabPageTwoPlusEntry.UseVisualStyleBackColor = true;
-            // 
-            // dgvTwoPlusEntry
-            // 
-            this.dgvTwoPlusEntry.AllowUserToAddRows = false;
-            this.dgvTwoPlusEntry.AllowUserToDeleteRows = false;
-            this.dgvTwoPlusEntry.AllowUserToResizeColumns = false;
-            this.dgvTwoPlusEntry.AllowUserToResizeRows = false;
-            this.dgvTwoPlusEntry.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.dgvTwoPlusEntry.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTwoPlusEntry.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgcTwoLogId,
-            this.dgcTwoEmployeeId,
-            this.dgcTwoEmployeeCode,
-            this.dgcTwoEmployeeName,
-            this.dgcTwoBMEmployeeId,
-            this.dgcTwoPunchTime,
-            this.dgcTwoRecordType,
-            this.dgcTwoDelete});
-            this.dgvTwoPlusEntry.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTwoPlusEntry.Location = new System.Drawing.Point(0, 0);
-            this.dgvTwoPlusEntry.Name = "dgvTwoPlusEntry";
-            this.dgvTwoPlusEntry.ReadOnly = true;
-            this.dgvTwoPlusEntry.Size = new System.Drawing.Size(976, 441);
-            this.dgvTwoPlusEntry.TabIndex = 2;
-            this.dgvTwoPlusEntry.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTwoPlusEntry_CellContentClick);
-            // 
-            // buttonLoadData
-            // 
-            this.buttonLoadData.Location = new System.Drawing.Point(528, 12);
-            this.buttonLoadData.Name = "buttonLoadData";
-            this.buttonLoadData.Size = new System.Drawing.Size(113, 29);
-            this.buttonLoadData.TabIndex = 5;
-            this.buttonLoadData.Text = "Load Data";
-            this.buttonLoadData.UseVisualStyleBackColor = true;
-            this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
-            // 
-            // buttonDeleteLog
-            // 
-            this.buttonDeleteLog.ForeColor = System.Drawing.Color.Red;
-            this.buttonDeleteLog.Location = new System.Drawing.Point(12, 12);
-            this.buttonDeleteLog.Name = "buttonDeleteLog";
-            this.buttonDeleteLog.Size = new System.Drawing.Size(113, 29);
-            this.buttonDeleteLog.TabIndex = 39;
-            this.buttonDeleteLog.Text = "Delete Log";
-            this.buttonDeleteLog.UseVisualStyleBackColor = true;
-            this.buttonDeleteLog.Visible = false;
-            this.buttonDeleteLog.Click += new System.EventHandler(this.buttonDeleteLog_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Batch Code";
-            // 
-            // label3
-            // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(984, 42);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Manage Missing Log";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // buttonClose
-            // 
-            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonClose.ForeColor = System.Drawing.Color.Red;
-            this.buttonClose.Location = new System.Drawing.Point(950, 5);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(30, 30);
-            this.buttonClose.TabIndex = 40;
-            this.buttonClose.Text = "X";
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // dgcRawLogId
             // 
@@ -338,6 +214,42 @@
             this.dgcRawRowType.HeaderText = "R.Type";
             this.dgcRawRowType.Name = "dgcRawRowType";
             this.dgcRawRowType.ReadOnly = true;
+            // 
+            // tabPageOneEntry
+            // 
+            this.tabPageOneEntry.Controls.Add(this.dgvOneEntry);
+            this.tabPageOneEntry.Location = new System.Drawing.Point(4, 27);
+            this.tabPageOneEntry.Name = "tabPageOneEntry";
+            this.tabPageOneEntry.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageOneEntry.Size = new System.Drawing.Size(976, 441);
+            this.tabPageOneEntry.TabIndex = 1;
+            this.tabPageOneEntry.Text = "#One Entry     ";
+            this.tabPageOneEntry.UseVisualStyleBackColor = true;
+            // 
+            // dgvOneEntry
+            // 
+            this.dgvOneEntry.AllowUserToAddRows = false;
+            this.dgvOneEntry.AllowUserToDeleteRows = false;
+            this.dgvOneEntry.AllowUserToResizeColumns = false;
+            this.dgvOneEntry.AllowUserToResizeRows = false;
+            this.dgvOneEntry.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.dgvOneEntry.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOneEntry.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgcOneLogId,
+            this.dgcOneEmployeeId,
+            this.dgcEmployeeCode,
+            this.dgcOneEmployeeName,
+            this.dgcOneBMEmployeeId,
+            this.dgcPunchTime,
+            this.dgcOneRecordType,
+            this.dgcOneAddLog});
+            this.dgvOneEntry.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvOneEntry.Location = new System.Drawing.Point(3, 3);
+            this.dgvOneEntry.Name = "dgvOneEntry";
+            this.dgvOneEntry.ReadOnly = true;
+            this.dgvOneEntry.Size = new System.Drawing.Size(970, 435);
+            this.dgvOneEntry.TabIndex = 1;
+            this.dgvOneEntry.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOneEntry_CellContentClick);
             // 
             // dgcOneLogId
             // 
@@ -402,6 +314,41 @@
             this.dgcOneAddLog.Text = "Add Log";
             this.dgcOneAddLog.UseColumnTextForLinkValue = true;
             // 
+            // tabPageDuplicateEntry
+            // 
+            this.tabPageDuplicateEntry.Controls.Add(this.dgvTwoPlusEntry);
+            this.tabPageDuplicateEntry.Location = new System.Drawing.Point(4, 27);
+            this.tabPageDuplicateEntry.Name = "tabPageDuplicateEntry";
+            this.tabPageDuplicateEntry.Size = new System.Drawing.Size(976, 441);
+            this.tabPageDuplicateEntry.TabIndex = 2;
+            this.tabPageDuplicateEntry.Text = "#Duplicate Entry     ";
+            this.tabPageDuplicateEntry.UseVisualStyleBackColor = true;
+            // 
+            // dgvTwoPlusEntry
+            // 
+            this.dgvTwoPlusEntry.AllowUserToAddRows = false;
+            this.dgvTwoPlusEntry.AllowUserToDeleteRows = false;
+            this.dgvTwoPlusEntry.AllowUserToResizeColumns = false;
+            this.dgvTwoPlusEntry.AllowUserToResizeRows = false;
+            this.dgvTwoPlusEntry.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.dgvTwoPlusEntry.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTwoPlusEntry.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgcTwoLogId,
+            this.dgcTwoEmployeeId,
+            this.dgcTwoEmployeeCode,
+            this.dgcTwoEmployeeName,
+            this.dgcTwoBMEmployeeId,
+            this.dgcTwoPunchTime,
+            this.dgcTwoRecordType,
+            this.dgcTwoDelete});
+            this.dgvTwoPlusEntry.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTwoPlusEntry.Location = new System.Drawing.Point(0, 0);
+            this.dgvTwoPlusEntry.Name = "dgvTwoPlusEntry";
+            this.dgvTwoPlusEntry.ReadOnly = true;
+            this.dgvTwoPlusEntry.Size = new System.Drawing.Size(976, 441);
+            this.dgvTwoPlusEntry.TabIndex = 2;
+            this.dgvTwoPlusEntry.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTwoPlusEntry_CellContentClick);
+            // 
             // dgcTwoLogId
             // 
             this.dgcTwoLogId.DataPropertyName = "LogId";
@@ -465,6 +412,71 @@
             this.dgcTwoDelete.Text = "Delete Log";
             this.dgcTwoDelete.UseColumnTextForLinkValue = true;
             // 
+            // buttonLoadData
+            // 
+            this.buttonLoadData.Location = new System.Drawing.Point(528, 12);
+            this.buttonLoadData.Name = "buttonLoadData";
+            this.buttonLoadData.Size = new System.Drawing.Size(113, 29);
+            this.buttonLoadData.TabIndex = 5;
+            this.buttonLoadData.Text = "Load Data";
+            this.buttonLoadData.UseVisualStyleBackColor = true;
+            this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
+            // 
+            // buttonDeleteLog
+            // 
+            this.buttonDeleteLog.ForeColor = System.Drawing.Color.Red;
+            this.buttonDeleteLog.Location = new System.Drawing.Point(12, 12);
+            this.buttonDeleteLog.Name = "buttonDeleteLog";
+            this.buttonDeleteLog.Size = new System.Drawing.Size(113, 29);
+            this.buttonDeleteLog.TabIndex = 39;
+            this.buttonDeleteLog.Text = "Delete Log";
+            this.buttonDeleteLog.UseVisualStyleBackColor = true;
+            this.buttonDeleteLog.Visible = false;
+            this.buttonDeleteLog.Click += new System.EventHandler(this.buttonDeleteLog_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Batch Code";
+            // 
+            // label3
+            // 
+            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(984, 42);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Manage Missing Log";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonClose.ForeColor = System.Drawing.Color.Red;
+            this.buttonClose.Location = new System.Drawing.Point(950, 5);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(30, 30);
+            this.buttonClose.TabIndex = 40;
+            this.buttonClose.Text = "X";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // buttonAutoDeleteDuplicates
+            // 
+            this.buttonAutoDeleteDuplicates.Location = new System.Drawing.Point(766, 12);
+            this.buttonAutoDeleteDuplicates.Name = "buttonAutoDeleteDuplicates";
+            this.buttonAutoDeleteDuplicates.Size = new System.Drawing.Size(186, 29);
+            this.buttonAutoDeleteDuplicates.TabIndex = 41;
+            this.buttonAutoDeleteDuplicates.Text = "Auto Delete Duplicates";
+            this.buttonAutoDeleteDuplicates.UseVisualStyleBackColor = true;
+            this.buttonAutoDeleteDuplicates.Click += new System.EventHandler(this.buttonAutoDeleteDuplicates_Click);
+            // 
             // FormManageMissingLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -489,7 +501,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBiometricLogs)).EndInit();
             this.tabPageOneEntry.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOneEntry)).EndInit();
-            this.tabPageTwoPlusEntry.ResumeLayout(false);
+            this.tabPageDuplicateEntry.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTwoPlusEntry)).EndInit();
             this.ResumeLayout(false);
 
@@ -507,7 +519,7 @@
         private System.Windows.Forms.DataGridView dgvBiometricLogs;
         private System.Windows.Forms.Button buttonDeleteLog;
         private System.Windows.Forms.Button buttonApplyInOut;
-        private System.Windows.Forms.TabPage tabPageTwoPlusEntry;
+        private System.Windows.Forms.TabPage tabPageDuplicateEntry;
         private System.Windows.Forms.DataGridView dgvOneEntry;
         private System.Windows.Forms.DataGridView dgvTwoPlusEntry;
         private System.Windows.Forms.Button buttonClose;
@@ -535,6 +547,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcTwoPunchTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcTwoRecordType;
         private System.Windows.Forms.DataGridViewLinkColumn dgcTwoDelete;
+        private System.Windows.Forms.Button buttonAutoDeleteDuplicates;
     }
 }
 

@@ -286,6 +286,17 @@
     <Content Include="dev-help.txt" />
     <Content Include="DummyData\dummy employee.txt" />
     <Content Include="DummyData\dummy employees 40.sql" />
+    <Content Include="Images\001 emp intro.png" />
+    <Content Include="Images\002 emp login.png" />
+    <Content Include="Images\003 emp menu.png" />
+    <Content Include="Images\004 emp users.png" />
+    <Content Include="Images\005 emp change password.png" />
+    <Content Include="Images\006 empl list.png" />
+    <Content Include="Images\007 emp edit.png" />
+    <Content Include="Images\008 emp import attendace.png" />
+    <Content Include="Images\009 emp manage missing log.png" />
+    <Content Include="Images\010 emp month hours.png" />
+    <Content Include="Images\010 emp salary report.png" />
     <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

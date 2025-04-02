@@ -70,7 +70,8 @@ namespace CSEmployeeAttendance25
 
                 LoadBioMetricData(batchCode);
                 LoadOneEntryData(batchCode);
-                LoadTwoPlusEntryData(batchCode);
+                //LoadTwoPlusEntryData(batchCode);
+                LoadDuplicateEntryData(batchCode);
 
                 tabControlMain.SelectedTab = tabPageAllRecords; // Ensure the tab is selected
                 tabPageAllRecords.Focus(); // Set focus on the tab
@@ -96,11 +97,18 @@ namespace CSEmployeeAttendance25
             tabPageOneEntry.Text = "#One Entry (" + dgvOneEntry.RowCount + ")    ";
         }
 
-        private void LoadTwoPlusEntryData(string batchCode)
+        //private void LoadTwoPlusEntryData(string batchCode)
+        //{
+        //    dgvTwoPlusEntry.DataSource = _biometricLogHelper.GetBiometricLogsWithEmployeeTwoPlusEntry(batchCode);
+
+        //    tabPageDuplicateEntry.Text = "#Two Plus Entry (" + dgvTwoPlusEntry.RowCount + ")    ";
+        //}
+
+        private void LoadDuplicateEntryData(string batchCode)
         {
             dgvTwoPlusEntry.DataSource = _biometricLogHelper.GetBiometricLogsWithEmployeeTwoPlusEntry(batchCode);
 
-            tabPageTwoPlusEntry.Text = "#Two Plus Entry (" + dgvTwoPlusEntry.RowCount + ")    ";
+            tabPageDuplicateEntry.Text = "#Duplicate Entry (" + dgvTwoPlusEntry.RowCount + ")    ";
         }
 
         private void buttonApplyInOut_Click(object sender, EventArgs e)
@@ -187,12 +195,41 @@ namespace CSEmployeeAttendance25
                     _biometricLogHelper.DeleteBiometricLog(id);
 
                     LoadBioMetricData(batchCode);
-                    LoadTwoPlusEntryData(batchCode);
+                    //LoadTwoPlusEntryData(batchCode);
+                    LoadDuplicateEntryData(batchCode);
 
-                    tabControlMain.SelectedTab = tabPageTwoPlusEntry; // Ensure the tab is selected
-                    tabPageTwoPlusEntry.Focus(); // Set focus on the tab
+                    tabControlMain.SelectedTab = tabPageDuplicateEntry; // Ensure the tab is selected
+                    tabPageDuplicateEntry.Focus(); // Set focus on the tab
                 }
             }
+        }
+
+        private void buttonAutoDeleteDuplicates_Click(object sender, EventArgs e)
+        {
+            if (dgvTwoPlusEntry.RowCount == 0)
+            {
+                buttonAutoDeleteDuplicates.Enabled = false;
+                return;
+            }
+            if (comboBoxBatchCode.SelectedValue == null)
+            {
+                MessageBox.Show("Seelct Batch!");
+                return;
+            }
+            string batchCode = comboBoxBatchCode.SelectedValue.ToString();
+
+            if (MessageBox.Show("Do you want to delete duplucate punch times?", "Time-span 15 Minutes", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
+            _biometricLogHelper.DeleteBiometricLogDuplicateEntry(batchCode);
+
+            LoadBioMetricData(batchCode);
+            LoadDuplicateEntryData(batchCode);
+
+            tabControlMain.SelectedTab = tabPageDuplicateEntry; // Ensure the tab is selected
+            tabPageDuplicateEntry.Focus(); // Set focus on the tab
         }
     }
 }

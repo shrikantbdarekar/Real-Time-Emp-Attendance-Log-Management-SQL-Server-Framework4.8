@@ -302,6 +302,53 @@ namespace CSEmployeeAttendance25.Data
             return logs;
         }
 
+        public List<BiometricLogDTOWithEmployee> GetBiometricLogsWithEmployeeDuplicateEntry(string batchCode)
+        {
+            string query = @"SELECT 
+                    E.EmployeeId,E.EmployeeCode,E.EmployeeName,BL1.*
+                FROM BiometricLogs BL1
+                JOIN BiometricLogs BL2 
+                    ON BL1.BMEmployeeId = BL2.BMEmployeeId 
+                    AND BL1.LogId <> BL2.LogId
+                    AND ABS(DATEDIFF(MINUTE, BL1.PunchTime, BL2.PunchTime)) <= 15
+                    AND BL1.InOut != ''
+                JOIN Employees E 
+                    ON BL1.BMEmployeeId = E.BMEmployeeId
+                ORDER BY BL1.PunchTime,BL1.BMEmployeeId;
+                WHERE B.BatchCode = @BatchCode
+                ORDER BY PunchDate, B.BMEmployeeId;";
+
+            SqlParameter[] parameters = { new SqlParameter("@BatchCode", batchCode) };
+            DataTable dt = _dbHelper.ExecuteQuery(query, parameters);
+            List<BiometricLogDTOWithEmployee> logs = new List<BiometricLogDTOWithEmployee>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                logs.Add(new BiometricLogDTOWithEmployee
+                {
+                    LogId = Convert.ToInt64(row["LogId"]),
+                    BMEmployeeId = Convert.ToInt32(row["BMEmployeeId"]),
+                    PunchTime = Convert.ToDateTime(row["PunchTime"]),
+                    DeviceId = Convert.ToInt32(row["DeviceId"]),
+                    PunchTypeFlag = Convert.ToInt32(row["PunchTypeFlag"]),
+                    VerificationMode = Convert.ToInt32(row["VerificationMode"]),
+                    StatusCode = Convert.ToInt32(row["StatusCode"]),
+                    CreatedAt = Convert.ToDateTime(row["CreatedAt"]),
+                    RecordType = row["RecordType"].ToString(),
+                    BatchCode = row["BatchCode"].ToString(),
+                    StartDate = Convert.ToDateTime(row["StartDate"]),
+                    EndDate = Convert.ToDateTime(row["EndDate"]),
+                    InOut = row["InOut"].ToString(),
+                    ManualEntryRemark = row["ManualEntryRemark"].ToString(),
+
+                    EmployeeId = Convert.ToInt64(row["EmployeeId"]),
+                    EmployeeCode = row["EmployeeCode"].ToString(),
+                    EmployeeName = row["EmployeeName"].ToString()
+                });
+            }
+            return logs;
+        }
+
         // Get Biometric Log by ID
         public BiometricLogDTO GetBiometricLogById(long logId)
         {
@@ -374,6 +421,40 @@ namespace CSEmployeeAttendance25.Data
             SqlParameter[] parameters = { new SqlParameter("@BatchCode", batchCode) };
             return _dbHelper.ExecuteNonQuery(query, parameters) > 0;
         }
+
+        // Delete Biometric Log
+        public bool DeleteBiometricLogDuplicateEntry(string batchCode)
+        {
+            string query = @"WITH DuplicateLogs AS (
+                SELECT 
+                    BL1.LogId, 
+                    BL1.BMEmployeeId, 
+                    BL1.PunchTime, 
+                    BL1.InOut,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY BL1.BMEmployeeId, CONVERT(DATE, BL1.PunchTime) -- Partition by Employee & Date
+                        ORDER BY 
+                            CASE 
+                                WHEN FORMAT(BL1.PunchTime, 'tt') = 'AM' THEN 1 -- AM first
+                                ELSE 2 -- PM last
+                            END,
+                            BL1.PunchTime ASC  -- Earliest AM first, latest PM last
+                    ) AS RowNum
+                FROM BiometricLogs BL1
+                JOIN BiometricLogs BL2
+                    ON BL1.BMEmployeeId = BL2.BMEmployeeId
+                    AND BL1.LogId <> BL2.LogId
+                    AND ABS(DATEDIFF(MINUTE, BL1.PunchTime, BL2.PunchTime)) <= 15
+                WHERE BL1.BatchCode = @BatchCode  -- Apply batch filtering
+            )
+            DELETE FROM BiometricLogs 
+            WHERE LogId IN (SELECT LogId FROM DuplicateLogs WHERE RowNum > 1);";
+
+            SqlParameter[] parameters = { new SqlParameter("@BatchCode", batchCode) };
+
+            return _dbHelper.ExecuteNonQuery(query, parameters) > 0;
+        }
+
 
         // Get distinct BatchCodes where InOut flag process is pending
         public DataTable GetDistinctBatchCodesWithInOut()
