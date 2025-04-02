@@ -265,6 +265,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="Reports\DataSetAttendance.xsc">
       <DependentUpon>DataSetAttendance.xsd</DependentUpon>
     </None>
