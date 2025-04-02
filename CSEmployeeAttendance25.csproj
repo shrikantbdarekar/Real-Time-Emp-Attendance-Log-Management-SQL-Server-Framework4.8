@@ -294,7 +294,7 @@
     <Content Include="Images\005_emp_change_password.png" />
     <Content Include="Images\006_empl_list.png" />
     <Content Include="Images\007_emp_edit.png" />
-    <Content Include="Images\008_emp_import _ttendace.png" />
+    <Content Include="Images\008_emp_import_attendace.png" />
     <Content Include="Images\009_emp_manage_missing_log.png" />
     <Content Include="Images\010_emp_month_hours.png" />
     <Content Include="Images\011_emp_salary_report.png" />

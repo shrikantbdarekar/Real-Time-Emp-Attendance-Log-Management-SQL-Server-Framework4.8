@@ -46,9 +46,17 @@ The project uses **SQL Server** with key tables:
 - `CompanyInfo`
 
 ## Screenshots
-![Project Intro](Images/001_emp_intro)
-![Biometric Logs](Images/002_emp_login.png)
-![Report Sample](Images/report_sample.png)
+![Project Intro](Images/001_emp_intro.png)
+![Login](Images/002_emp_login.png)
+![Menu](Images/003_emp_menu.png)
+![Users](Images/004_emp_users.png)
+![Change Password](Images/005_emp_change_password.png)
+![Employee List](Images/006_empl_list.png)
+![Employee](Images/007_emp_edit.png)
+![Import Log from biometric machine](Images/008_emp_import_attendace.png)
+![Manage MIssing Log](Images/009_emp_manage_missing_log.png)
+![Month Hour and Salary Calculation](Images/010_emp_month_hours.png)
+![Month Salary Report](Images/011_emp_salary_report.png)
 
 ## How to Run
 1. Install **.NET Framework 4.8**.
