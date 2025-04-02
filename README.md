@@ -46,8 +46,8 @@ The project uses **SQL Server** with key tables:
 - `CompanyInfo`
 
 ## Screenshots
-![Project Intro](Images/001 emp intro.png)
-![Biometric Logs](Images/biometric_logs.png)
+![Project Intro](Images/001_emp_intro)
+![Biometric Logs](Images/002_emp_login.png)
 ![Report Sample](Images/report_sample.png)
 
 ## How to Run
