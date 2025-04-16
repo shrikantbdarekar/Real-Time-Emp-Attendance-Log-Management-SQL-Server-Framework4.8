@@ -39,7 +39,12 @@ namespace CSEmployeeAttendance25.Data
                 Website = row["Website"].ToString(),
                 CreatedAt = Convert.ToDateTime(row["CreatedAt"]),
                 ShiftStart = (TimeSpan)row["ShiftStart"],
-                ShiftEnd = (TimeSpan)row["ShiftEnd"]
+                ShiftEnd = (TimeSpan)row["ShiftEnd"],
+
+                ApplyTimeAdjustment = Convert.ToBoolean(row["ApplyTimeAdjustment"]),
+                FromHour = Convert.ToDecimal(row["FromHour"]),
+                ToHour = Convert.ToDecimal(row["ToHour"]),
+                DeductMinutes = Convert.ToDecimal(row["DeductMinutes"])
             };
         }
 
@@ -51,8 +56,8 @@ namespace CSEmployeeAttendance25.Data
             if (existingCompany == null)
             {
                 // INSERT if no record exists
-                string insertQuery = @"INSERT INTO CompanyInfo (CompanyName, CompanyAddress, EmailId, ContactNo, Website, CreatedAt, ShiftStart, ShiftEnd) 
-                                   VALUES (@CompanyName, @CompanyAddress, @EmailId, @ContactNo, @Website, GETDATE(), @ShiftStart, @ShiftEnd)";
+                string insertQuery = @"INSERT INTO CompanyInfo (CompanyName, CompanyAddress, EmailId, ContactNo, Website, CreatedAt, ShiftStart, ShiftEnd,ApplyTimeAdjustment,FromHour,ToHour,DeductMinutes) 
+                                   VALUES (@CompanyName, @CompanyAddress, @EmailId, @ContactNo, @Website, GETDATE(), @ShiftStart, @ShiftEnd,@ApplyTimeAdjustment,@FromHour,@ToHour,@DeductMinutes)";
                 SqlParameter[] parameters =
                 {
                 new SqlParameter("@CompanyName", company.CompanyName),
@@ -61,7 +66,13 @@ namespace CSEmployeeAttendance25.Data
                 new SqlParameter("@ContactNo", company.ContactNo),
                 new SqlParameter("@Website", company.Website),
                 new SqlParameter("@ShiftStart", company.ShiftStart),
-                new SqlParameter("@ShiftEnd", company.ShiftEnd)
+                new SqlParameter("@ShiftEnd", company.ShiftEnd),
+
+                new SqlParameter("@ApplyTimeAdjustment", company.ApplyTimeAdjustment),
+                new SqlParameter("@FromHour", company.FromHour),
+                new SqlParameter("@ToHour", company.ToHour),
+                new SqlParameter("@DeductMinutes", company.DeductMinutes)
+
             };
 
                 return _dbHelper.ExecuteNonQuery(insertQuery, parameters) > 0;
@@ -71,7 +82,8 @@ namespace CSEmployeeAttendance25.Data
                 // UPDATE if record exists
                 string updateQuery = @"UPDATE CompanyInfo 
                                    SET CompanyName = @CompanyName, CompanyAddress = @CompanyAddress, EmailId = @EmailId, 
-                                       ContactNo = @ContactNo, Website = @Website, ShiftStart = @ShiftStart, ShiftEnd = @ShiftEnd 
+                                       ContactNo = @ContactNo, Website = @Website, ShiftStart = @ShiftStart, ShiftEnd = @ShiftEnd,
+                                   ApplyTimeAdjustment=@ApplyTimeAdjustment,FromHour=@FromHour,ToHour=@ToHour,DeductMinutes=@DeductMinutes 
                                    WHERE CompanyId = @CompanyId";
                 SqlParameter[] parameters =
                 {
@@ -82,7 +94,12 @@ namespace CSEmployeeAttendance25.Data
                 new SqlParameter("@ContactNo", company.ContactNo),
                 new SqlParameter("@Website", company.Website),
                 new SqlParameter("@ShiftStart", company.ShiftStart),
-                new SqlParameter("@ShiftEnd", company.ShiftEnd)
+                new SqlParameter("@ShiftEnd", company.ShiftEnd),
+
+                new SqlParameter("@ApplyTimeAdjustment", company.ApplyTimeAdjustment),
+                new SqlParameter("@FromHour", company.FromHour),
+                new SqlParameter("@ToHour", company.ToHour),
+                new SqlParameter("@DeductMinutes", company.DeductMinutes)
             };
 
                 return _dbHelper.ExecuteNonQuery(updateQuery, parameters) > 0;

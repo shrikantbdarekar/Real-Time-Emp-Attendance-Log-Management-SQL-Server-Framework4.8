@@ -26,6 +26,7 @@ namespace CSEmployeeAttendance25
             }
             else if (Program.loginUser.Role == (int)enumMyUserRoles.Admin)
             {
+                mnuCompanyInfo.Visible = true;
                 mnuUserAccount.Visible = true;
             }
         }

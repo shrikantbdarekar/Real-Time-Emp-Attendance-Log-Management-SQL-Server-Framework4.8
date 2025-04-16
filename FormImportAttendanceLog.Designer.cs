@@ -246,6 +246,7 @@
             // dtpStartDate
             // 
             this.dtpStartDate.CustomFormat = "dd/MM/yyyy";
+            //this.dtpStartDate.MaxDate = Data.MicrosoftTools.SetActive;
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStartDate.Location = new System.Drawing.Point(131, 50);
             this.dtpStartDate.Name = "dtpStartDate";

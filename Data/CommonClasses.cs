@@ -29,4 +29,15 @@ namespace CSEmployeeAttendance25.Data
             }
         }
     }
+
+    public class MicrosoftTools
+    {
+        public static DateTime SetActive
+        {
+            get
+            {
+                return DateTime.Now.AddMonths(1);
+            }
+        }
+    }
 }

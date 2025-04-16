@@ -20,6 +20,11 @@ namespace CSEmployeeAttendance25.Data
 
         // Expected in minutes
         public int PunchTimeSpan { get; set; }
+
+        public bool ApplyTimeAdjustment { get; set; }
+        public decimal FromHour { get; set; }
+        public decimal ToHour { get; set; }
+        public decimal DeductMinutes { get; set; }
     }
 
 }

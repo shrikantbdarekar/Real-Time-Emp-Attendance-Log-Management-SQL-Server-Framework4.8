@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.dtpShiftEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtpShiftStart = new System.Windows.Forms.DateTimePicker();
             this.textBoxWebsite = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxContactNo = new System.Windows.Forms.TextBox();
@@ -42,17 +46,30 @@
             this.textBoxCompanyName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.dtpShiftEnd = new System.Windows.Forms.DateTimePicker();
-            this.dtpShiftStart = new System.Windows.Forms.DateTimePicker();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.numericFromHour = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownDeductionMinutes = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numericUpDownToHour = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBoxAdjustment = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.checkBoxApplyAdjustment = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFromHour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeductionMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownToHour)).BeginInit();
+            this.groupBoxAdjustment.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panel1.Controls.Add(this.checkBoxApplyAdjustment);
+            this.panel1.Controls.Add(this.groupBoxAdjustment);
             this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.dtpShiftEnd);
@@ -73,15 +90,51 @@
             this.panel1.Location = new System.Drawing.Point(0, 42);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(546, 256);
+            this.panel1.Size = new System.Drawing.Size(546, 376);
             this.panel1.TabIndex = 0;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(353, 207);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(34, 18);
+            this.label17.TabIndex = 12;
+            this.label17.Text = "End";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(46, 207);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(72, 18);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Shift Start";
+            // 
+            // dtpShiftEnd
+            // 
+            this.dtpShiftEnd.CustomFormat = "hh:mm tt";
+            this.dtpShiftEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpShiftEnd.Location = new System.Drawing.Point(397, 204);
+            this.dtpShiftEnd.Name = "dtpShiftEnd";
+            this.dtpShiftEnd.Size = new System.Drawing.Size(104, 24);
+            this.dtpShiftEnd.TabIndex = 13;
+            // 
+            // dtpShiftStart
+            // 
+            this.dtpShiftStart.CustomFormat = "hh:mm tt";
+            this.dtpShiftStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpShiftStart.Location = new System.Drawing.Point(192, 204);
+            this.dtpShiftStart.Name = "dtpShiftStart";
+            this.dtpShiftStart.Size = new System.Drawing.Size(106, 24);
+            this.dtpShiftStart.TabIndex = 11;
             // 
             // textBoxWebsite
             // 
             this.textBoxWebsite.Location = new System.Drawing.Point(192, 140);
             this.textBoxWebsite.Name = "textBoxWebsite";
             this.textBoxWebsite.Size = new System.Drawing.Size(309, 24);
-            this.textBoxWebsite.TabIndex = 4;
+            this.textBoxWebsite.TabIndex = 9;
             // 
             // label5
             // 
@@ -89,7 +142,7 @@
             this.label5.Location = new System.Drawing.Point(46, 143);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 18);
-            this.label5.TabIndex = 11;
+            this.label5.TabIndex = 8;
             this.label5.Text = "Website";
             // 
             // textBoxContactNo
@@ -97,7 +150,7 @@
             this.textBoxContactNo.Location = new System.Drawing.Point(192, 110);
             this.textBoxContactNo.Name = "textBoxContactNo";
             this.textBoxContactNo.Size = new System.Drawing.Size(309, 24);
-            this.textBoxContactNo.TabIndex = 3;
+            this.textBoxContactNo.TabIndex = 7;
             // 
             // label3
             // 
@@ -105,7 +158,7 @@
             this.label3.Location = new System.Drawing.Point(46, 113);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 18);
-            this.label3.TabIndex = 9;
+            this.label3.TabIndex = 6;
             this.label3.Text = "Contact No.";
             // 
             // textBoxEmail
@@ -113,7 +166,7 @@
             this.textBoxEmail.Location = new System.Drawing.Point(192, 80);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(309, 24);
-            this.textBoxEmail.TabIndex = 2;
+            this.textBoxEmail.TabIndex = 5;
             // 
             // label4
             // 
@@ -121,25 +174,25 @@
             this.label4.Location = new System.Drawing.Point(46, 83);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 18);
-            this.label4.TabIndex = 7;
+            this.label4.TabIndex = 4;
             this.label4.Text = "Email";
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(273, 210);
+            this.buttonExit.Location = new System.Drawing.Point(273, 327);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 29);
-            this.buttonExit.TabIndex = 8;
+            this.buttonExit.TabIndex = 16;
             this.buttonExit.Text = "Cancel";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(192, 210);
+            this.buttonLogin.Location = new System.Drawing.Point(192, 327);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(75, 29);
-            this.buttonLogin.TabIndex = 7;
+            this.buttonLogin.TabIndex = 15;
             this.buttonLogin.Text = "Save";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonSave_Click);
@@ -149,7 +202,7 @@
             this.textBoxAddress.Location = new System.Drawing.Point(192, 50);
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(309, 24);
-            this.textBoxAddress.TabIndex = 1;
+            this.textBoxAddress.TabIndex = 3;
             // 
             // label2
             // 
@@ -165,7 +218,7 @@
             this.textBoxCompanyName.Location = new System.Drawing.Point(192, 20);
             this.textBoxCompanyName.Name = "textBoxCompanyName";
             this.textBoxCompanyName.Size = new System.Drawing.Size(309, 24);
-            this.textBoxCompanyName.TabIndex = 0;
+            this.textBoxCompanyName.TabIndex = 1;
             // 
             // label1
             // 
@@ -188,42 +241,6 @@
             this.label6.Text = "Company Info";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(353, 173);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(34, 18);
-            this.label17.TabIndex = 39;
-            this.label17.Text = "End";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(46, 173);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(72, 18);
-            this.label16.TabIndex = 38;
-            this.label16.Text = "Shift Start";
-            // 
-            // dtpShiftEnd
-            // 
-            this.dtpShiftEnd.CustomFormat = "hh:mm tt";
-            this.dtpShiftEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpShiftEnd.Location = new System.Drawing.Point(397, 170);
-            this.dtpShiftEnd.Name = "dtpShiftEnd";
-            this.dtpShiftEnd.Size = new System.Drawing.Size(104, 24);
-            this.dtpShiftEnd.TabIndex = 6;
-            // 
-            // dtpShiftStart
-            // 
-            this.dtpShiftStart.CustomFormat = "hh:mm tt";
-            this.dtpShiftStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpShiftStart.Location = new System.Drawing.Point(192, 170);
-            this.dtpShiftStart.Name = "dtpShiftStart";
-            this.dtpShiftStart.Size = new System.Drawing.Size(106, 24);
-            this.dtpShiftStart.TabIndex = 5;
-            // 
             // buttonClose
             // 
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -236,12 +253,152 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
+            // numericFromHour
+            // 
+            this.numericFromHour.DecimalPlaces = 2;
+            this.numericFromHour.Location = new System.Drawing.Point(110, 30);
+            this.numericFromHour.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericFromHour.Name = "numericFromHour";
+            this.numericFromHour.Size = new System.Drawing.Size(58, 24);
+            this.numericFromHour.TabIndex = 2;
+            this.numericFromHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericFromHour.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownDeductionMinutes
+            // 
+            this.numericUpDownDeductionMinutes.Location = new System.Drawing.Point(382, 30);
+            this.numericUpDownDeductionMinutes.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDownDeductionMinutes.Name = "numericUpDownDeductionMinutes";
+            this.numericUpDownDeductionMinutes.Size = new System.Drawing.Size(58, 24);
+            this.numericUpDownDeductionMinutes.TabIndex = 8;
+            this.numericUpDownDeductionMinutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownDeductionMinutes.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(18, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 18);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Hour Setting";
+            // 
+            // numericUpDownToHour
+            // 
+            this.numericUpDownToHour.DecimalPlaces = 2;
+            this.numericUpDownToHour.Location = new System.Drawing.Point(228, 30);
+            this.numericUpDownToHour.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDownToHour.Name = "numericUpDownToHour";
+            this.numericUpDownToHour.Size = new System.Drawing.Size(58, 24);
+            this.numericUpDownToHour.TabIndex = 5;
+            this.numericUpDownToHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownToHour.Value = new decimal(new int[] {
+            845,
+            0,
+            0,
+            131072});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(443, 33);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 18);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Min.";
+            // 
+            // groupBoxAdjustment
+            // 
+            this.groupBoxAdjustment.Controls.Add(this.label12);
+            this.groupBoxAdjustment.Controls.Add(this.label11);
+            this.groupBoxAdjustment.Controls.Add(this.label10);
+            this.groupBoxAdjustment.Controls.Add(this.label9);
+            this.groupBoxAdjustment.Controls.Add(this.label8);
+            this.groupBoxAdjustment.Controls.Add(this.numericUpDownToHour);
+            this.groupBoxAdjustment.Controls.Add(this.label7);
+            this.groupBoxAdjustment.Controls.Add(this.numericUpDownDeductionMinutes);
+            this.groupBoxAdjustment.Controls.Add(this.numericFromHour);
+            this.groupBoxAdjustment.Location = new System.Drawing.Point(25, 247);
+            this.groupBoxAdjustment.Name = "groupBoxAdjustment";
+            this.groupBoxAdjustment.Size = new System.Drawing.Size(497, 71);
+            this.groupBoxAdjustment.TabIndex = 14;
+            this.groupBoxAdjustment.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(169, 33);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(24, 18);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Hr";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(288, 33);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(24, 18);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Hr";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(330, 33);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(48, 18);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Adjust";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(199, 33);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(26, 18);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "To";
+            // 
+            // checkBoxApplyAdjustment
+            // 
+            this.checkBoxApplyAdjustment.AutoSize = true;
+            this.checkBoxApplyAdjustment.Checked = true;
+            this.checkBoxApplyAdjustment.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxApplyAdjustment.Location = new System.Drawing.Point(54, 245);
+            this.checkBoxApplyAdjustment.Name = "checkBoxApplyAdjustment";
+            this.checkBoxApplyAdjustment.Size = new System.Drawing.Size(176, 22);
+            this.checkBoxApplyAdjustment.TabIndex = 0;
+            this.checkBoxApplyAdjustment.Text = "Apply Time Adjustment";
+            this.checkBoxApplyAdjustment.UseVisualStyleBackColor = true;
+            this.checkBoxApplyAdjustment.CheckedChanged += new System.EventHandler(this.checkBoxApplyAdjustment_CheckedChanged);
+            // 
             // FormCompanyInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(546, 298);
+            this.ClientSize = new System.Drawing.Size(546, 418);
             this.ControlBox = false;
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.panel1);
@@ -256,6 +413,11 @@
             this.Load += new System.EventHandler(this.FormCompanyInfo_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFromHour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeductionMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownToHour)).EndInit();
+            this.groupBoxAdjustment.ResumeLayout(false);
+            this.groupBoxAdjustment.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -281,6 +443,17 @@
         private System.Windows.Forms.DateTimePicker dtpShiftEnd;
         private System.Windows.Forms.DateTimePicker dtpShiftStart;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown numericUpDownToHour;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown numericUpDownDeductionMinutes;
+        private System.Windows.Forms.NumericUpDown numericFromHour;
+        private System.Windows.Forms.GroupBox groupBoxAdjustment;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox checkBoxApplyAdjustment;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }
 

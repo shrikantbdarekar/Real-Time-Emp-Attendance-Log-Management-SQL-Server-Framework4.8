@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -19,6 +20,16 @@ namespace CSEmployeeAttendance25
         {
             InitializeComponent();
 
+            bool setEnabled = true;
+            if (Program.loginUser.Role == (int)enumMyUserRoles.Admin)
+                setEnabled = false;
+
+            textBoxCompanyName.Enabled = setEnabled;
+            textBoxAddress.Enabled = setEnabled;
+            textBoxEmail.Enabled = setEnabled;
+            textBoxContactNo.Enabled = setEnabled;
+            textBoxWebsite.Enabled = setEnabled;
+
             _companyHelper = new CompanyInfoDBHelper();
             LoadCompanyInfo();
         }
@@ -35,6 +46,11 @@ namespace CSEmployeeAttendance25
                 textBoxWebsite.Text = company.Website;
                 dtpShiftStart.Value = DateTime.Today.Add(company.ShiftStart); // Convert TimeSpan to DateTime
                 dtpShiftEnd.Value = DateTime.Today.Add(company.ShiftEnd);
+
+                checkBoxApplyAdjustment.Checked = company.ApplyTimeAdjustment;
+                numericFromHour.Value = company.FromHour;
+                numericUpDownToHour.Value = company.ToHour;
+                numericUpDownDeductionMinutes.Value = company.DeductMinutes;
             }
         }
 
@@ -61,14 +77,19 @@ namespace CSEmployeeAttendance25
                 ContactNo = textBoxContactNo.Text.Trim(),
                 Website = textBoxWebsite.Text.Trim(),
                 ShiftStart = dtpShiftStart.Value.TimeOfDay, // Convert DateTime to TimeSpan
-                ShiftEnd = dtpShiftEnd.Value.TimeOfDay // Convert DateTime to TimeSpan
+                ShiftEnd = dtpShiftEnd.Value.TimeOfDay, // Convert DateTime to TimeSpan
+
+                ApplyTimeAdjustment = checkBoxApplyAdjustment.Checked,
+                FromHour = (decimal)numericFromHour.Value,
+                ToHour = (decimal)numericUpDownToHour.Value,
+                DeductMinutes = (decimal)numericUpDownDeductionMinutes.Value
             };
 
             // Save Data
             bool success = _companyHelper.SaveCompanyInfo(company);
             if (success)
             {
-                MessageBox.Show("Company info saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Company info updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
             }
             else
@@ -83,6 +104,11 @@ namespace CSEmployeeAttendance25
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void checkBoxApplyAdjustment_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBoxAdjustment.Enabled = checkBoxApplyAdjustment.Checked;
         }
     }
 }

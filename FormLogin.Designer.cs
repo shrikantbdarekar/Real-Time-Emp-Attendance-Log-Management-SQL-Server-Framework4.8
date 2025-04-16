@@ -31,7 +31,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
@@ -46,7 +45,6 @@
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.panel1.Controls.Add(this.buttonExit);
             this.panel1.Controls.Add(this.buttonLogin);
-            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.textBoxPassword);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textBoxUserName);
@@ -60,7 +58,7 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(271, 112);
+            this.buttonExit.Location = new System.Drawing.Point(210, 112);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 29);
             this.buttonExit.TabIndex = 6;
@@ -70,7 +68,7 @@
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(190, 112);
+            this.buttonLogin.Location = new System.Drawing.Point(129, 112);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(75, 29);
             this.buttonLogin.TabIndex = 5;
@@ -78,18 +76,9 @@
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
-            // panel2
-            // 
-            this.panel2.BackgroundImage = global::CSEmployeeAttendance25.Properties.Resources.thumb;
-            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel2.Location = new System.Drawing.Point(30, 32);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(106, 109);
-            this.panel2.TabIndex = 4;
-            // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(242, 74);
+            this.textBoxPassword.Location = new System.Drawing.Point(181, 74);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(144, 24);
@@ -98,7 +87,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(152, 77);
+            this.label2.Location = new System.Drawing.Point(91, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 18);
             this.label2.TabIndex = 2;
@@ -106,7 +95,7 @@
             // 
             // textBoxUserName
             // 
-            this.textBoxUserName.Location = new System.Drawing.Point(242, 44);
+            this.textBoxUserName.Location = new System.Drawing.Point(181, 44);
             this.textBoxUserName.Name = "textBoxUserName";
             this.textBoxUserName.Size = new System.Drawing.Size(144, 24);
             this.textBoxUserName.TabIndex = 1;
@@ -114,7 +103,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(152, 47);
+            this.label1.Location = new System.Drawing.Point(91, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 18);
             this.label1.TabIndex = 0;
@@ -171,7 +160,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxUserName;
