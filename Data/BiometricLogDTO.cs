@@ -59,6 +59,7 @@ namespace CSEmployeeAttendance25.Data
         public string InTime12Hr { get; set; }
         public string OutTime12Hr { get; set; }
         public string DayHours { get; set; }
+        public string ActualDayHours { get; set; }        
         public decimal HourSalary { get; set; }
         public decimal DaySalary { get; set; }
     }

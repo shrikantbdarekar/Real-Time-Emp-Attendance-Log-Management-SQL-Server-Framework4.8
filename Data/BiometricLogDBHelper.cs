@@ -162,6 +162,48 @@ namespace CSEmployeeAttendance25.Data
                     MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
                 ) % 60, '00') AS DayHours,
 
+                -- ActualDayHours calculation
+                FORMAT(
+                    CASE 
+                        WHEN DATEDIFF(MINUTE, 
+                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                        ) > 390 AND 
+                             DATEDIFF(MINUTE, 
+                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                        ) < 520
+                        THEN DATEDIFF(MINUTE, 
+                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                        ) - 30
+                        ELSE DATEDIFF(MINUTE, 
+                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                        )
+                    END / 60, '00'
+                ) + ':' +
+                FORMAT(
+                    CASE 
+                        WHEN DATEDIFF(MINUTE, 
+                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                        ) > 390 AND 
+                             DATEDIFF(MINUTE, 
+                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                        ) < 520
+                        THEN DATEDIFF(MINUTE, 
+                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                        ) - 30
+                        ELSE DATEDIFF(MINUTE, 
+                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+                        )
+                    END % 60, '00'
+                ) AS ActualDayHours,
+
                -- Calculate DaySalary with exactly 2 decimal places
                 CAST(ROUND(
                     CAST(DATEDIFF(MINUTE, 
@@ -203,6 +245,7 @@ namespace CSEmployeeAttendance25.Data
                     OutTime12Hr = row["OutTime12Hr"] as string ?? "",
 
                     DayHours = row["DayHours"] as string ?? "",
+                    ActualDayHours = row["ActualDayHours"] as string ?? "",
                     HourSalary = Convert.ToDecimal(row["HourlySalary"].ToString()),
                     DaySalary = Convert.ToDecimal(row["DaySalary"].ToString())
                 });

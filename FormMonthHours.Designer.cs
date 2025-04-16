@@ -29,21 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonPrint = new System.Windows.Forms.Button();
             this.buttonFilterEmployee = new System.Windows.Forms.Button();
             this.comboBoxEmployee = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageDailyHours = new System.Windows.Forms.TabPage();
             this.dgvMonthHours = new System.Windows.Forms.DataGridView();
-            this.dgcRawEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcRawEmployeeCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcRawEmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcHoursBMEmpId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcRawBMEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcRawPunchTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcRawDeviceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcRawInOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcHourSalary = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgcMonthDaySalary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageMonthLog = new System.Windows.Forms.TabPage();
             this.dgvBiometricLogs = new System.Windows.Forms.DataGridView();
             this.dgcRawLogId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,7 +53,17 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.buttonPrint = new System.Windows.Forms.Button();
+            this.dgcRawEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcRawEmployeeCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcRawEmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcHoursBMEmpId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcRawBMEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcRawPunchTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcRawDeviceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcRawInOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcADH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcHourSalary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgcMonthDaySalary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageDailyHours.SuspendLayout();
@@ -90,6 +91,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(984, 519);
             this.panel1.TabIndex = 0;
+            // 
+            // buttonPrint
+            // 
+            this.buttonPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPrint.Location = new System.Drawing.Point(502, 12);
+            this.buttonPrint.Name = "buttonPrint";
+            this.buttonPrint.Size = new System.Drawing.Size(33, 29);
+            this.buttonPrint.TabIndex = 40;
+            this.buttonPrint.Text = "P";
+            this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
             // 
             // buttonFilterEmployee
             // 
@@ -153,6 +165,7 @@
             this.dgcRawPunchTime,
             this.dgcRawDeviceId,
             this.dgcRawInOut,
+            this.dgcADH,
             this.dgcHourSalary,
             this.dgcMonthDaySalary});
             this.dgvMonthHours.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -161,81 +174,6 @@
             this.dgvMonthHours.ReadOnly = true;
             this.dgvMonthHours.Size = new System.Drawing.Size(970, 436);
             this.dgvMonthHours.TabIndex = 0;
-            // 
-            // dgcRawEmployeeId
-            // 
-            this.dgcRawEmployeeId.DataPropertyName = "EmployeeId";
-            this.dgcRawEmployeeId.HeaderText = "Employee Id";
-            this.dgcRawEmployeeId.Name = "dgcRawEmployeeId";
-            this.dgcRawEmployeeId.ReadOnly = true;
-            this.dgcRawEmployeeId.Visible = false;
-            // 
-            // dgcRawEmployeeCode
-            // 
-            this.dgcRawEmployeeCode.DataPropertyName = "EmployeeCode";
-            this.dgcRawEmployeeCode.HeaderText = "Emp Code";
-            this.dgcRawEmployeeCode.Name = "dgcRawEmployeeCode";
-            this.dgcRawEmployeeCode.ReadOnly = true;
-            this.dgcRawEmployeeCode.Width = 90;
-            // 
-            // dgcRawEmployeeName
-            // 
-            this.dgcRawEmployeeName.DataPropertyName = "EmployeeName";
-            this.dgcRawEmployeeName.HeaderText = "Employee Name";
-            this.dgcRawEmployeeName.Name = "dgcRawEmployeeName";
-            this.dgcRawEmployeeName.ReadOnly = true;
-            this.dgcRawEmployeeName.Width = 120;
-            // 
-            // dgcHoursBMEmpId
-            // 
-            this.dgcHoursBMEmpId.DataPropertyName = "BMEmployeeId";
-            this.dgcHoursBMEmpId.HeaderText = "BM Emp Id";
-            this.dgcHoursBMEmpId.Name = "dgcHoursBMEmpId";
-            this.dgcHoursBMEmpId.ReadOnly = true;
-            // 
-            // dgcRawBMEmployeeId
-            // 
-            this.dgcRawBMEmployeeId.DataPropertyName = "PunchDate";
-            this.dgcRawBMEmployeeId.HeaderText = "Punch Date";
-            this.dgcRawBMEmployeeId.Name = "dgcRawBMEmployeeId";
-            this.dgcRawBMEmployeeId.ReadOnly = true;
-            // 
-            // dgcRawPunchTime
-            // 
-            this.dgcRawPunchTime.DataPropertyName = "InTime12Hr";
-            this.dgcRawPunchTime.HeaderText = "In";
-            this.dgcRawPunchTime.Name = "dgcRawPunchTime";
-            this.dgcRawPunchTime.ReadOnly = true;
-            this.dgcRawPunchTime.Width = 80;
-            // 
-            // dgcRawDeviceId
-            // 
-            this.dgcRawDeviceId.DataPropertyName = "OutTime12Hr";
-            this.dgcRawDeviceId.HeaderText = "Out";
-            this.dgcRawDeviceId.Name = "dgcRawDeviceId";
-            this.dgcRawDeviceId.ReadOnly = true;
-            this.dgcRawDeviceId.Width = 80;
-            // 
-            // dgcRawInOut
-            // 
-            this.dgcRawInOut.DataPropertyName = "DayHours";
-            this.dgcRawInOut.HeaderText = "Hours";
-            this.dgcRawInOut.Name = "dgcRawInOut";
-            this.dgcRawInOut.ReadOnly = true;
-            // 
-            // dgcHourSalary
-            // 
-            this.dgcHourSalary.DataPropertyName = "HourSalary";
-            this.dgcHourSalary.HeaderText = "Hour Salary";
-            this.dgcHourSalary.Name = "dgcHourSalary";
-            this.dgcHourSalary.ReadOnly = true;
-            // 
-            // dgcMonthDaySalary
-            // 
-            this.dgcMonthDaySalary.DataPropertyName = "DaySalary";
-            this.dgcMonthDaySalary.HeaderText = "Day Salary";
-            this.dgcMonthDaySalary.Name = "dgcMonthDaySalary";
-            this.dgcMonthDaySalary.ReadOnly = true;
             // 
             // tabPageMonthLog
             // 
@@ -415,16 +353,87 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // buttonPrint
+            // dgcRawEmployeeId
             // 
-            this.buttonPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPrint.Location = new System.Drawing.Point(502, 12);
-            this.buttonPrint.Name = "buttonPrint";
-            this.buttonPrint.Size = new System.Drawing.Size(33, 29);
-            this.buttonPrint.TabIndex = 40;
-            this.buttonPrint.Text = "P";
-            this.buttonPrint.UseVisualStyleBackColor = true;
-            this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
+            this.dgcRawEmployeeId.DataPropertyName = "EmployeeId";
+            this.dgcRawEmployeeId.HeaderText = "Employee Id";
+            this.dgcRawEmployeeId.Name = "dgcRawEmployeeId";
+            this.dgcRawEmployeeId.ReadOnly = true;
+            this.dgcRawEmployeeId.Visible = false;
+            // 
+            // dgcRawEmployeeCode
+            // 
+            this.dgcRawEmployeeCode.DataPropertyName = "EmployeeCode";
+            this.dgcRawEmployeeCode.HeaderText = "Emp Code";
+            this.dgcRawEmployeeCode.Name = "dgcRawEmployeeCode";
+            this.dgcRawEmployeeCode.ReadOnly = true;
+            this.dgcRawEmployeeCode.Width = 90;
+            // 
+            // dgcRawEmployeeName
+            // 
+            this.dgcRawEmployeeName.DataPropertyName = "EmployeeName";
+            this.dgcRawEmployeeName.HeaderText = "Employee Name";
+            this.dgcRawEmployeeName.Name = "dgcRawEmployeeName";
+            this.dgcRawEmployeeName.ReadOnly = true;
+            this.dgcRawEmployeeName.Width = 120;
+            // 
+            // dgcHoursBMEmpId
+            // 
+            this.dgcHoursBMEmpId.DataPropertyName = "BMEmployeeId";
+            this.dgcHoursBMEmpId.HeaderText = "BM Emp Id";
+            this.dgcHoursBMEmpId.Name = "dgcHoursBMEmpId";
+            this.dgcHoursBMEmpId.ReadOnly = true;
+            // 
+            // dgcRawBMEmployeeId
+            // 
+            this.dgcRawBMEmployeeId.DataPropertyName = "PunchDate";
+            this.dgcRawBMEmployeeId.HeaderText = "Punch Date";
+            this.dgcRawBMEmployeeId.Name = "dgcRawBMEmployeeId";
+            this.dgcRawBMEmployeeId.ReadOnly = true;
+            // 
+            // dgcRawPunchTime
+            // 
+            this.dgcRawPunchTime.DataPropertyName = "InTime12Hr";
+            this.dgcRawPunchTime.HeaderText = "In";
+            this.dgcRawPunchTime.Name = "dgcRawPunchTime";
+            this.dgcRawPunchTime.ReadOnly = true;
+            this.dgcRawPunchTime.Width = 80;
+            // 
+            // dgcRawDeviceId
+            // 
+            this.dgcRawDeviceId.DataPropertyName = "OutTime12Hr";
+            this.dgcRawDeviceId.HeaderText = "Out";
+            this.dgcRawDeviceId.Name = "dgcRawDeviceId";
+            this.dgcRawDeviceId.ReadOnly = true;
+            this.dgcRawDeviceId.Width = 80;
+            // 
+            // dgcRawInOut
+            // 
+            this.dgcRawInOut.DataPropertyName = "DayHours";
+            this.dgcRawInOut.HeaderText = "Hours";
+            this.dgcRawInOut.Name = "dgcRawInOut";
+            this.dgcRawInOut.ReadOnly = true;
+            // 
+            // dgcADH
+            // 
+            this.dgcADH.DataPropertyName = "ActualDayHours";
+            this.dgcADH.HeaderText = "ADH";
+            this.dgcADH.Name = "dgcADH";
+            this.dgcADH.ReadOnly = true;
+            // 
+            // dgcHourSalary
+            // 
+            this.dgcHourSalary.DataPropertyName = "HourSalary";
+            this.dgcHourSalary.HeaderText = "Hour Salary";
+            this.dgcHourSalary.Name = "dgcHourSalary";
+            this.dgcHourSalary.ReadOnly = true;
+            // 
+            // dgcMonthDaySalary
+            // 
+            this.dgcMonthDaySalary.DataPropertyName = "DaySalary";
+            this.dgcMonthDaySalary.HeaderText = "Day Salary";
+            this.dgcMonthDaySalary.Name = "dgcMonthDaySalary";
+            this.dgcMonthDaySalary.ReadOnly = true;
             // 
             // FormMonthHours
             // 
@@ -481,6 +490,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcMonthInOut;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcRawRowType;
         private System.Windows.Forms.Button buttonFilterEmployee;
+        private System.Windows.Forms.Button buttonPrint;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcRawEmployeeId;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcRawEmployeeCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcRawEmployeeName;
@@ -489,9 +499,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcRawPunchTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcRawDeviceId;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcRawInOut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgcADH;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcHourSalary;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcMonthDaySalary;
-        private System.Windows.Forms.Button buttonPrint;
     }
 }
 
