@@ -132,99 +132,354 @@ namespace CSEmployeeAttendance25.Data
             return logs;
         }
 
-        public List<BiometricLogDTOEmployeeMonthHour> GetBiometricLogsForEmployeeMonthHour(DateTime startDate, DateTime endDate)
+        public List<EmployeeMonthSalaryDTO> GetEmployeeMonthSalary(DateTime startDate, DateTime endDate)
         {
-            string query = @"SELECT 
-                E.EmployeeId,
-                E.EmployeeCode,
-                E.EmployeeName,
-                E.HourlySalary,
-                B.BMEmployeeId,
-                CONVERT(DATE, B.PunchTime) AS PunchDate,
 
-                -- InTime in 24-hour format
-                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END) AS InTime,
-                -- InTime in 12-hour format
-                FORMAT(MAX(CASE WHEN B.InOut = 'IN' THEN B.PunchTime END), 'hh:mm tt') AS InTime12Hr,
-
-                -- OutTime in 24-hour format
-                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END) AS OutTime,
-                -- OutTime in 12-hour format
-                FORMAT(MAX(CASE WHEN B.InOut = 'OUT' THEN B.PunchTime END), 'hh:mm tt') AS OutTime12Hr,
-
-                -- Calculate DayHours (HH:MM format)
-                FORMAT(DATEDIFF(MINUTE, 
-                    MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                    MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                ) / 60, '00') + ':' +
-                FORMAT(DATEDIFF(MINUTE, 
-                    MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                    MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                ) % 60, '00') AS DayHours,
-
-                -- ActualDayHours calculation
-                FORMAT(
-                    CASE 
-                        WHEN DATEDIFF(MINUTE, 
-                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                        ) > 390 AND 
-                             DATEDIFF(MINUTE, 
-                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                        ) < 520
-                        THEN DATEDIFF(MINUTE, 
-                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                        ) - 30
-                        ELSE DATEDIFF(MINUTE, 
-                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                        )
-                    END / 60, '00'
-                ) + ':' +
-                FORMAT(
-                    CASE 
-                        WHEN DATEDIFF(MINUTE, 
-                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                        ) > 390 AND 
-                             DATEDIFF(MINUTE, 
-                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                        ) < 520
-                        THEN DATEDIFF(MINUTE, 
-                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                        ) - 30
-                        ELSE DATEDIFF(MINUTE, 
-                            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                        )
-                    END % 60, '00'
-                ) AS ActualDayHours,
-
-               -- Calculate DaySalary with exactly 2 decimal places
-                CAST(ROUND(
-                    CAST(DATEDIFF(MINUTE, 
-                        MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
-                        MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
-                    ) AS DECIMAL(10,2)) / 60 * E.HourlySalary, 
-                    2
-                ) AS DECIMAL(10,2)) AS DaySalary
-
-            FROM BiometricLogs B
-            JOIN Employees E ON B.BMEmployeeId = E.BMEmployeeId
-            WHERE B.InOut <> '' 
-            AND B.PunchTime >= @StartDate 
-            AND B.PunchTime <= @EndDate
-            GROUP BY E.EmployeeId, E.EmployeeCode, E.EmployeeName, E.HourlySalary, B.BMEmployeeId, CONVERT(DATE, B.PunchTime);";
+            string query = @"select distinct EmployeeId,EmployeeCode,BMEmployeeId,EmployeeName,sum(DaySalary) As MonthSalary 
+from vw_AttendanceSummary where PunchDate BETWEEN @StartDate AND @EndDate group by EmployeeId,EmployeeCode,BMEmployeeId,EmployeeName";
 
             SqlParameter[] parameters = {
                 new SqlParameter("@StartDate", startDate) ,
                 new SqlParameter("@EndDate", endDate),
-                //new SqlParameter("@EmployeeId", employeeId)
-            };
+        };
+            DataTable dt = _dbHelper.ExecuteQuery(query, parameters);
+            List<EmployeeMonthSalaryDTO> monthRecords = new List<EmployeeMonthSalaryDTO>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                monthRecords.Add(new EmployeeMonthSalaryDTO
+                {
+                    EmployeeId = Convert.ToInt64(row["EmployeeId"]),
+                    EmployeeCode = row["EmployeeCode"] as string ?? "",
+                    EmployeeName = row["EmployeeName"] as string ?? "",
+                    BMEmployeeId = Convert.ToInt32(row["BMEmployeeId"]),
+                    MonthSalary = Convert.ToDecimal(row["MonthSalary"].ToString())
+                });
+            }
+            return monthRecords;
+        }
+        public List<BiometricLogDTOEmployeeMonthHour> GetBiometricLogsForEmployeeMonthHour(DateTime startDate, DateTime endDate)
+        {
+            //Way:1
+            //string timeStr = "6.30";
+            //string[] parts = timeStr.Split('.');
+            //int hours = int.Parse(parts[0]);
+            //int minutes = int.Parse(parts[1]);
+            //int totalMinutes = (hours * 60) + minutes;
+
+            //Way:2
+            int fromHourMinutes = (int)Program.companyInfo.FromHour.TotalMinutes;
+            int toHourMinutes = (int)Program.companyInfo.ToHour.TotalMinutes;
+            int deductionMinutes = Program.companyInfo.DeductMinutes;
+
+            //Way:3
+            //int fromHourMinutes = (int)(Program.companyInfo.FromHour * 60);
+            //int toHourMinutes = (int)(Program.companyInfo.ToHour * 60);
+            //int deductionMinutes = (int)Program.companyInfo.DeductMinutes;
+
+            #region Comment Query
+
+            //string query = @"SELECT 
+            //    E.EmployeeId,
+            //    E.EmployeeCode,
+            //    E.EmployeeName,
+            //    E.HourlySalary,
+            //    B.BMEmployeeId,
+            //    CONVERT(DATE, B.PunchTime) AS PunchDate,
+
+            //    -- InTime in 24-hour format
+            //    MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END) AS InTime,
+            //    -- InTime in 12-hour format
+            //    FORMAT(MAX(CASE WHEN B.InOut = 'IN' THEN B.PunchTime END), 'hh:mm tt') AS InTime12Hr,
+
+            //    -- OutTime in 24-hour format
+            //    MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END) AS OutTime,
+            //    -- OutTime in 12-hour format
+            //    FORMAT(MAX(CASE WHEN B.InOut = 'OUT' THEN B.PunchTime END), 'hh:mm tt') AS OutTime12Hr,
+
+            //    -- Calculate DayHours (HH:MM format)
+            //    FORMAT(DATEDIFF(MINUTE, 
+            //        MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //        MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //    ) / 60, '00') + ':' +
+            //    FORMAT(DATEDIFF(MINUTE, 
+            //        MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //        MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //    ) % 60, '00') AS DayHours,
+
+            //    -- ActualDayHours calculation
+            //    FORMAT(
+            //        CASE 
+            //            WHEN DATEDIFF(MINUTE, 
+            //                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //            ) > 390 AND 
+            //                 DATEDIFF(MINUTE, 
+            //                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //            ) < 520
+            //            THEN DATEDIFF(MINUTE, 
+            //                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //            ) - 30
+            //            ELSE DATEDIFF(MINUTE, 
+            //                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //            )
+            //        END / 60, '00'
+            //    ) + ':' +
+            //    FORMAT(
+            //        CASE 
+            //            WHEN DATEDIFF(MINUTE, 
+            //                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //            ) > 390 AND 
+            //                 DATEDIFF(MINUTE, 
+            //                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //            ) < 520
+            //            THEN DATEDIFF(MINUTE, 
+            //                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //            ) - 30
+            //            ELSE DATEDIFF(MINUTE, 
+            //                MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //                MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //            )
+            //        END % 60, '00'
+            //    ) AS ActualDayHours,
+
+            //   -- Calculate DaySalary with exactly 2 decimal places
+            //    CAST(ROUND(
+            //        CAST(DATEDIFF(MINUTE, 
+            //            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            //            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+            //        ) AS DECIMAL(10,2)) / 60 * E.HourlySalary, 
+            //        2
+            //    ) AS DECIMAL(10,2)) AS DaySalary
+
+            //FROM BiometricLogs B
+            //JOIN Employees E ON B.BMEmployeeId = E.BMEmployeeId
+            //WHERE B.InOut <> '' 
+            //AND B.PunchTime >= @StartDate 
+            //AND B.PunchTime <= @EndDate
+            //GROUP BY E.EmployeeId, E.EmployeeCode, E.EmployeeName, E.HourlySalary, B.BMEmployeeId, CONVERT(DATE, B.PunchTime);";
+
+
+
+            //            string query1 = @"SELECT 
+            //    E.EmployeeId,
+            //    E.EmployeeCode,
+            //    E.EmployeeName,
+            //    E.HourlySalary,
+            //    B.BMEmployeeId,
+            //    CAST(B.PunchTime AS DATE) AS PunchDate,
+
+            //    -- InTime and OutTime
+            //    InOutTimes.InTime,
+            //    FORMAT(InOutTimes.InTime, 'hh:mm tt') AS InTime12Hr,
+            //    InOutTimes.OutTime,
+            //    FORMAT(InOutTimes.OutTime, 'hh:mm tt') AS OutTime12Hr,
+
+            //    -- DayHours (HH:MM)
+            //    FORMAT(Duration.TotalMinutes / 60, '00') + ':' + FORMAT(Duration.TotalMinutes % 60, '00') AS DayHours,
+
+            //    -- ActualDayHours (HH:MM)
+            //    FORMAT(Duration.ActualMinutes / 60, '00') + ':' + FORMAT(Duration.ActualMinutes % 60, '00') AS ActualDayHours,
+
+            //    -- DaySalary using ActualMinutes
+            //    CAST(ROUND(
+            //        (CAST(Duration.ActualMinutes AS DECIMAL(10,2)) / 60) * E.HourlySalary, 
+            //        2
+            //    ) AS DECIMAL(10,2)) AS DaySalary
+
+            //FROM BiometricLogs B
+            //JOIN Employees E ON B.BMEmployeeId = E.BMEmployeeId
+
+            //-- Calculate IN and OUT times
+            //CROSS APPLY (
+            //    SELECT 
+            //        MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END) AS InTime,
+            //        MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END) AS OutTime
+            //) AS InOutTimes
+
+            //-- Calculate TotalMinutes and ActualMinutes (with 30 min deduction if within 6.5 - 8.4 hours)
+            //CROSS APPLY (
+            //    SELECT 
+            //        DATEDIFF(MINUTE, InOutTimes.InTime, InOutTimes.OutTime) AS TotalMinutes,
+            //        CASE 
+            //            WHEN DATEDIFF(MINUTE, InOutTimes.InTime, InOutTimes.OutTime) > 390 AND 
+            //                 DATEDIFF(MINUTE, InOutTimes.InTime, InOutTimes.OutTime) < 520
+            //            THEN DATEDIFF(MINUTE, InOutTimes.InTime, InOutTimes.OutTime) - 30
+            //            ELSE DATEDIFF(MINUTE, InOutTimes.InTime, InOutTimes.OutTime)
+            //        END AS ActualMinutes
+            //) AS Duration
+
+            //WHERE B.InOut <> ''
+            //  AND B.PunchTime >= @StartDate
+            //  AND B.PunchTime <= @EndDate
+
+            //GROUP BY 
+            //    E.EmployeeId, E.EmployeeCode, E.EmployeeName, E.HourlySalary, B.BMEmployeeId, CAST(B.PunchTime AS DATE),
+            //    InOutTimes.InTime, InOutTimes.OutTime, Duration.TotalMinutes, Duration.ActualMinutes;";
+
+
+
+            //            string query = $@"-- Subquery to get InTime, OutTime, TotalMinutes per employee per date
+            //WITH Attendance AS (
+            //    SELECT 
+            //        E.EmployeeId,
+            //        E.EmployeeCode,
+            //        E.EmployeeName,
+            //        E.HourlySalary,
+            //        B.BMEmployeeId,
+            //        CAST(B.PunchTime AS DATE) AS PunchDate,
+
+            //        -- InTime and OutTime
+            //        MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END) AS InTime,
+            //        MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END) AS OutTime
+
+            //    FROM BiometricLogs B
+            //    JOIN Employees E ON B.BMEmployeeId = E.BMEmployeeId
+            //    WHERE B.InOut <> ''
+            //      AND B.PunchTime >= @StartDate
+            //      AND B.PunchTime <= @EndDate
+            //    GROUP BY E.EmployeeId, E.EmployeeCode, E.EmployeeName, E.HourlySalary, B.BMEmployeeId, CAST(B.PunchTime AS DATE)
+            //)
+
+            //SELECT 
+            //    A.EmployeeId,
+            //    A.EmployeeCode,
+            //    A.EmployeeName,
+            //    A.HourlySalary,
+            //    A.BMEmployeeId,
+            //    A.PunchDate,
+
+            //    -- InTime 24hr and 12hr
+            //    A.InTime,
+            //    FORMAT(CAST(A.PunchDate AS DATETIME) + CAST(A.InTime AS DATETIME), 'hh:mm tt') AS InTime12Hr,
+
+            //    -- OutTime 24hr and 12hr
+            //    A.OutTime,
+            //    FORMAT(CAST(A.PunchDate AS DATETIME) + CAST(A.OutTime AS DATETIME), 'hh:mm tt') AS OutTime12Hr,
+
+            //    -- Total minutes
+            //    DATEDIFF(MINUTE, A.InTime, A.OutTime) AS TotalMinutes,
+
+            //    -- DayHours (HH:MM)
+            //    FORMAT(DATEDIFF(MINUTE, A.InTime, A.OutTime) / 60, '00') + ':' +
+            //    FORMAT(DATEDIFF(MINUTE, A.InTime, A.OutTime) % 60, '00') AS DayHours,
+
+            //    -- ActualMinutes with deduction logic
+            //    CASE 
+            //        WHEN DATEDIFF(MINUTE, A.InTime, A.OutTime) > {fromHourMinutes} AND DATEDIFF(MINUTE, A.InTime, A.OutTime) < {toHourMinutes}
+            //        THEN DATEDIFF(MINUTE, A.InTime, A.OutTime) - {deductionMinutes}
+            //        ELSE DATEDIFF(MINUTE, A.InTime, A.OutTime)
+            //    END AS ActualMinutes,
+
+            //    -- ActualDayHours (HH:MM)
+            //    FORMAT(
+            //        CASE 
+            //            WHEN DATEDIFF(MINUTE, A.InTime, A.OutTime) > {fromHourMinutes} AND DATEDIFF(MINUTE, A.InTime, A.OutTime) < {toHourMinutes}
+            //            THEN DATEDIFF(MINUTE, A.InTime, A.OutTime) - {deductionMinutes}
+            //            ELSE DATEDIFF(MINUTE, A.InTime, A.OutTime)
+            //        END / 60, '00') + ':' + 
+            //    FORMAT(
+            //        CASE 
+            //            WHEN DATEDIFF(MINUTE, A.InTime, A.OutTime) > {fromHourMinutes} AND DATEDIFF(MINUTE, A.InTime, A.OutTime) < {toHourMinutes}
+            //            THEN DATEDIFF(MINUTE, A.InTime, A.OutTime) - {deductionMinutes}
+            //            ELSE DATEDIFF(MINUTE, A.InTime, A.OutTime)
+            //        END % 60, '00') AS ActualDayHours,
+
+            //    -- DaySalary based on actual minutes
+            //    CAST(ROUND(
+            //        (
+            //            CAST(
+            //                CASE 
+            //                    WHEN DATEDIFF(MINUTE, A.InTime, A.OutTime) > {fromHourMinutes} AND DATEDIFF(MINUTE, A.InTime, A.OutTime) < {toHourMinutes}
+            //                    THEN DATEDIFF(MINUTE, A.InTime, A.OutTime) - {deductionMinutes}
+            //                    ELSE DATEDIFF(MINUTE, A.InTime, A.OutTime)
+            //                END AS DECIMAL(10,2)
+            //            ) / 60
+            //        ) * A.HourlySalary, 
+            //        2
+            //    ) AS DECIMAL(10,2)) AS DaySalary
+
+            //FROM Attendance A;";
+
+            #endregion
+
+            string query = @"WITH Attendance AS (
+    SELECT 
+        E.EmployeeId,
+        E.EmployeeCode,
+        E.EmployeeName,
+        E.HourlySalary,
+        B.BMEmployeeId,
+        CONVERT(DATE, B.PunchTime) AS PunchDate,
+
+        MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END) AS InTime,
+        MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END) AS OutTime,
+
+        DATEDIFF(MINUTE, 
+            MAX(CASE WHEN B.InOut = 'IN' THEN CAST(B.PunchTime AS TIME) END), 
+            MAX(CASE WHEN B.InOut = 'OUT' THEN CAST(B.PunchTime AS TIME) END)
+        ) AS TotalMinutes
+    FROM BiometricLogs B
+    JOIN Employees E ON B.BMEmployeeId = E.BMEmployeeId
+    WHERE B.InOut <> '' 
+      AND B.PunchTime BETWEEN @StartDate AND @EndDate
+    GROUP BY E.EmployeeId, E.EmployeeCode, E.EmployeeName, E.HourlySalary, B.BMEmployeeId, CONVERT(DATE, B.PunchTime)
+)
+
+SELECT 
+    A.*,
+
+    -- In/Out Time in 12hr format
+    FORMAT(CAST(A.PunchDate AS DATETIME) + CAST(A.InTime AS DATETIME), 'hh:mm tt') AS InTime12Hr,
+    FORMAT(CAST(A.PunchDate AS DATETIME) + CAST(A.OutTime AS DATETIME), 'hh:mm tt') AS OutTime12Hr,
+
+    -- DayHours HH:MM
+    FORMAT(A.TotalMinutes / 60, '00') + ':' + FORMAT(A.TotalMinutes % 60, '00') AS DayHours,
+
+    -- Deduction logic (30 mins only if between 390 and 520)
+    CASE 
+        WHEN A.TotalMinutes BETWEEN @FromMinutes AND @ToMinutes THEN @DeductionMinutes 
+        ELSE 0 
+    END AS DeductionMinutes,
+
+    -- ActualDayHours = TotalMinutes - DeductionMinutes
+    FORMAT(
+        (CASE 
+            WHEN A.TotalMinutes BETWEEN @FromMinutes AND @ToMinutes THEN A.TotalMinutes - @DeductionMinutes
+            ELSE A.TotalMinutes
+        END) / 60, '00'
+    ) + ':' +
+    FORMAT(
+        (CASE 
+            WHEN A.TotalMinutes BETWEEN @FromMinutes AND @ToMinutes THEN A.TotalMinutes - @DeductionMinutes
+            ELSE A.TotalMinutes
+        END) % 60, '00'
+    ) AS ActualDayHours,
+
+    -- DaySalary = ActualMinutes * HourlyRate / 60
+    CAST(ROUND(
+        (CASE 
+            WHEN A.TotalMinutes BETWEEN @FromMinutes AND @ToMinutes THEN A.TotalMinutes - @DeductionMinutes
+            ELSE A.TotalMinutes
+        END) * A.HourlySalary / 60.0, 
+    2) AS DECIMAL(10,2)) AS DaySalary
+
+FROM Attendance A";
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@StartDate", startDate) ,
+                new SqlParameter("@EndDate", endDate),
+                new SqlParameter("@FromMinutes", fromHourMinutes),
+                new SqlParameter("@ToMinutes", toHourMinutes),
+                new SqlParameter("@DeductionMinutes", deductionMinutes)
+            //new SqlParameter("@EmployeeId", employeeId)
+        };
             DataTable dt = _dbHelper.ExecuteQuery(query, parameters);
             List<BiometricLogDTOEmployeeMonthHour> logs = new List<BiometricLogDTOEmployeeMonthHour>();
 

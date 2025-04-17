@@ -303,6 +303,8 @@ namespace CSEmployeeAttendance25.Reports {
             
             private global::System.Data.DataColumn columnDaySalary;
             
+            private global::System.Data.DataColumn columnActualDayHours;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BiometricLogDTOEmployeeMonthHourDataTable() {
@@ -434,6 +436,14 @@ namespace CSEmployeeAttendance25.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ActualDayHoursColumn {
+                get {
+                    return this.columnActualDayHours;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -469,7 +479,7 @@ namespace CSEmployeeAttendance25.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public BiometricLogDTOEmployeeMonthHourRow AddBiometricLogDTOEmployeeMonthHourRow(long EmployeeId, string EmployeeCode, string EmployeeName, int BMEmployeeId, System.DateTime PunchDate, System.TimeSpan InTime, System.TimeSpan OutTime, string InTime12Hr, string OutTime12Hr, string DayHours, decimal HourSalary, decimal DaySalary) {
+            public BiometricLogDTOEmployeeMonthHourRow AddBiometricLogDTOEmployeeMonthHourRow(long EmployeeId, string EmployeeCode, string EmployeeName, int BMEmployeeId, System.DateTime PunchDate, System.TimeSpan InTime, System.TimeSpan OutTime, string InTime12Hr, string OutTime12Hr, string DayHours, decimal HourSalary, decimal DaySalary, string ActualDayHours) {
                 BiometricLogDTOEmployeeMonthHourRow rowBiometricLogDTOEmployeeMonthHourRow = ((BiometricLogDTOEmployeeMonthHourRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         EmployeeId,
@@ -483,7 +493,8 @@ namespace CSEmployeeAttendance25.Reports {
                         OutTime12Hr,
                         DayHours,
                         HourSalary,
-                        DaySalary};
+                        DaySalary,
+                        ActualDayHours};
                 rowBiometricLogDTOEmployeeMonthHourRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBiometricLogDTOEmployeeMonthHourRow);
                 return rowBiometricLogDTOEmployeeMonthHourRow;
@@ -518,6 +529,7 @@ namespace CSEmployeeAttendance25.Reports {
                 this.columnDayHours = base.Columns["DayHours"];
                 this.columnHourSalary = base.Columns["HourSalary"];
                 this.columnDaySalary = base.Columns["DaySalary"];
+                this.columnActualDayHours = base.Columns["ActualDayHours"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -547,6 +559,8 @@ namespace CSEmployeeAttendance25.Reports {
                 base.Columns.Add(this.columnHourSalary);
                 this.columnDaySalary = new global::System.Data.DataColumn("DaySalary", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDaySalary);
+                this.columnActualDayHours = new global::System.Data.DataColumn("ActualDayHours", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnActualDayHours);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -893,6 +907,23 @@ namespace CSEmployeeAttendance25.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ActualDayHours {
+                get {
+                    try {
+                        return ((string)(this[this.tableBiometricLogDTOEmployeeMonthHour.ActualDayHoursColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ActualDayHours\' in table \'BiometricLogDTOEmployeeMonthHour\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBiometricLogDTOEmployeeMonthHour.ActualDayHoursColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsEmployeeIdNull() {
                 return this.IsNull(this.tableBiometricLogDTOEmployeeMonthHour.EmployeeIdColumn);
             }
@@ -1033,6 +1064,18 @@ namespace CSEmployeeAttendance25.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetDaySalaryNull() {
                 this[this.tableBiometricLogDTOEmployeeMonthHour.DaySalaryColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsActualDayHoursNull() {
+                return this.IsNull(this.tableBiometricLogDTOEmployeeMonthHour.ActualDayHoursColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetActualDayHoursNull() {
+                this[this.tableBiometricLogDTOEmployeeMonthHour.ActualDayHoursColumn] = global::System.Convert.DBNull;
             }
         }
         

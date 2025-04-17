@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBoxApplyAdjustment = new System.Windows.Forms.CheckBox();
+            this.groupBoxAdjustment = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numericUpDownDeductionMinutes = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.dtpShiftEnd = new System.Windows.Forms.DateTimePicker();
-            this.dtpShiftStart = new System.Windows.Forms.DateTimePicker();
             this.textBoxWebsite = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxContactNo = new System.Windows.Forms.TextBox();
@@ -47,22 +53,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.numericFromHour = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownDeductionMinutes = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.numericUpDownToHour = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBoxAdjustment = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.checkBoxApplyAdjustment = new System.Windows.Forms.CheckBox();
+            this.dtpShiftStart = new System.Windows.Forms.DateTimePicker();
+            this.dtpFromHour = new System.Windows.Forms.DateTimePicker();
+            this.dtpToHour = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericFromHour)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeductionMinutes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownToHour)).BeginInit();
             this.groupBoxAdjustment.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeductionMinutes)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -93,6 +89,88 @@
             this.panel1.Size = new System.Drawing.Size(546, 376);
             this.panel1.TabIndex = 0;
             // 
+            // checkBoxApplyAdjustment
+            // 
+            this.checkBoxApplyAdjustment.AutoSize = true;
+            this.checkBoxApplyAdjustment.Checked = true;
+            this.checkBoxApplyAdjustment.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxApplyAdjustment.Location = new System.Drawing.Point(54, 245);
+            this.checkBoxApplyAdjustment.Name = "checkBoxApplyAdjustment";
+            this.checkBoxApplyAdjustment.Size = new System.Drawing.Size(176, 22);
+            this.checkBoxApplyAdjustment.TabIndex = 0;
+            this.checkBoxApplyAdjustment.Text = "Apply Time Adjustment";
+            this.checkBoxApplyAdjustment.UseVisualStyleBackColor = true;
+            this.checkBoxApplyAdjustment.CheckedChanged += new System.EventHandler(this.checkBoxApplyAdjustment_CheckedChanged);
+            // 
+            // groupBoxAdjustment
+            // 
+            this.groupBoxAdjustment.Controls.Add(this.dtpToHour);
+            this.groupBoxAdjustment.Controls.Add(this.dtpFromHour);
+            this.groupBoxAdjustment.Controls.Add(this.label12);
+            this.groupBoxAdjustment.Controls.Add(this.label11);
+            this.groupBoxAdjustment.Controls.Add(this.label8);
+            this.groupBoxAdjustment.Controls.Add(this.label7);
+            this.groupBoxAdjustment.Controls.Add(this.numericUpDownDeductionMinutes);
+            this.groupBoxAdjustment.Location = new System.Drawing.Point(25, 247);
+            this.groupBoxAdjustment.Name = "groupBoxAdjustment";
+            this.groupBoxAdjustment.Size = new System.Drawing.Size(497, 71);
+            this.groupBoxAdjustment.TabIndex = 14;
+            this.groupBoxAdjustment.TabStop = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(205, 33);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(26, 18);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "To";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(320, 33);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(48, 18);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Adjust";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(433, 33);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 18);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Min.";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(28, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 18);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Hour Setting";
+            // 
+            // numericUpDownDeductionMinutes
+            // 
+            this.numericUpDownDeductionMinutes.Location = new System.Drawing.Point(372, 30);
+            this.numericUpDownDeductionMinutes.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDownDeductionMinutes.Name = "numericUpDownDeductionMinutes";
+            this.numericUpDownDeductionMinutes.Size = new System.Drawing.Size(58, 24);
+            this.numericUpDownDeductionMinutes.TabIndex = 8;
+            this.numericUpDownDeductionMinutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownDeductionMinutes.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -113,21 +191,12 @@
             // 
             // dtpShiftEnd
             // 
-            this.dtpShiftEnd.CustomFormat = "hh:mm tt";
+            this.dtpShiftEnd.CustomFormat = "hh:mm";
             this.dtpShiftEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpShiftEnd.Location = new System.Drawing.Point(397, 204);
             this.dtpShiftEnd.Name = "dtpShiftEnd";
             this.dtpShiftEnd.Size = new System.Drawing.Size(104, 24);
             this.dtpShiftEnd.TabIndex = 13;
-            // 
-            // dtpShiftStart
-            // 
-            this.dtpShiftStart.CustomFormat = "hh:mm tt";
-            this.dtpShiftStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpShiftStart.Location = new System.Drawing.Point(192, 204);
-            this.dtpShiftStart.Name = "dtpShiftStart";
-            this.dtpShiftStart.Size = new System.Drawing.Size(106, 24);
-            this.dtpShiftStart.TabIndex = 11;
             // 
             // textBoxWebsite
             // 
@@ -253,145 +322,32 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // numericFromHour
+            // dtpShiftStart
             // 
-            this.numericFromHour.DecimalPlaces = 2;
-            this.numericFromHour.Location = new System.Drawing.Point(110, 30);
-            this.numericFromHour.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericFromHour.Name = "numericFromHour";
-            this.numericFromHour.Size = new System.Drawing.Size(58, 24);
-            this.numericFromHour.TabIndex = 2;
-            this.numericFromHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericFromHour.Value = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
+            this.dtpShiftStart.CustomFormat = "hh:mm";
+            this.dtpShiftStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpShiftStart.Location = new System.Drawing.Point(192, 204);
+            this.dtpShiftStart.Name = "dtpShiftStart";
+            this.dtpShiftStart.Size = new System.Drawing.Size(75, 24);
+            this.dtpShiftStart.TabIndex = 11;
             // 
-            // numericUpDownDeductionMinutes
+            // dtpFromHour
             // 
-            this.numericUpDownDeductionMinutes.Location = new System.Drawing.Point(382, 30);
-            this.numericUpDownDeductionMinutes.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericUpDownDeductionMinutes.Name = "numericUpDownDeductionMinutes";
-            this.numericUpDownDeductionMinutes.Size = new System.Drawing.Size(58, 24);
-            this.numericUpDownDeductionMinutes.TabIndex = 8;
-            this.numericUpDownDeductionMinutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDownDeductionMinutes.Value = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
+            this.dtpFromHour.CustomFormat = "hh:mm";
+            this.dtpFromHour.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFromHour.Location = new System.Drawing.Point(124, 30);
+            this.dtpFromHour.Name = "dtpFromHour";
+            this.dtpFromHour.Size = new System.Drawing.Size(75, 24);
+            this.dtpFromHour.TabIndex = 17;
             // 
-            // label7
+            // dtpToHour
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 33);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 18);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Hour Setting";
-            // 
-            // numericUpDownToHour
-            // 
-            this.numericUpDownToHour.DecimalPlaces = 2;
-            this.numericUpDownToHour.Location = new System.Drawing.Point(228, 30);
-            this.numericUpDownToHour.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericUpDownToHour.Name = "numericUpDownToHour";
-            this.numericUpDownToHour.Size = new System.Drawing.Size(58, 24);
-            this.numericUpDownToHour.TabIndex = 5;
-            this.numericUpDownToHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDownToHour.Value = new decimal(new int[] {
-            845,
-            0,
-            0,
-            131072});
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(443, 33);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(36, 18);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Min.";
-            // 
-            // groupBoxAdjustment
-            // 
-            this.groupBoxAdjustment.Controls.Add(this.label12);
-            this.groupBoxAdjustment.Controls.Add(this.label11);
-            this.groupBoxAdjustment.Controls.Add(this.label10);
-            this.groupBoxAdjustment.Controls.Add(this.label9);
-            this.groupBoxAdjustment.Controls.Add(this.label8);
-            this.groupBoxAdjustment.Controls.Add(this.numericUpDownToHour);
-            this.groupBoxAdjustment.Controls.Add(this.label7);
-            this.groupBoxAdjustment.Controls.Add(this.numericUpDownDeductionMinutes);
-            this.groupBoxAdjustment.Controls.Add(this.numericFromHour);
-            this.groupBoxAdjustment.Location = new System.Drawing.Point(25, 247);
-            this.groupBoxAdjustment.Name = "groupBoxAdjustment";
-            this.groupBoxAdjustment.Size = new System.Drawing.Size(497, 71);
-            this.groupBoxAdjustment.TabIndex = 14;
-            this.groupBoxAdjustment.TabStop = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(169, 33);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(24, 18);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Hr";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(288, 33);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(24, 18);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Hr";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(330, 33);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(48, 18);
-            this.label11.TabIndex = 7;
-            this.label11.Text = "Adjust";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(199, 33);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(26, 18);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "To";
-            // 
-            // checkBoxApplyAdjustment
-            // 
-            this.checkBoxApplyAdjustment.AutoSize = true;
-            this.checkBoxApplyAdjustment.Checked = true;
-            this.checkBoxApplyAdjustment.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxApplyAdjustment.Location = new System.Drawing.Point(54, 245);
-            this.checkBoxApplyAdjustment.Name = "checkBoxApplyAdjustment";
-            this.checkBoxApplyAdjustment.Size = new System.Drawing.Size(176, 22);
-            this.checkBoxApplyAdjustment.TabIndex = 0;
-            this.checkBoxApplyAdjustment.Text = "Apply Time Adjustment";
-            this.checkBoxApplyAdjustment.UseVisualStyleBackColor = true;
-            this.checkBoxApplyAdjustment.CheckedChanged += new System.EventHandler(this.checkBoxApplyAdjustment_CheckedChanged);
+            this.dtpToHour.CustomFormat = "hh:mm";
+            this.dtpToHour.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpToHour.Location = new System.Drawing.Point(237, 30);
+            this.dtpToHour.Name = "dtpToHour";
+            this.dtpToHour.Size = new System.Drawing.Size(75, 24);
+            this.dtpToHour.TabIndex = 18;
             // 
             // FormCompanyInfo
             // 
@@ -413,11 +369,9 @@
             this.Load += new System.EventHandler(this.FormCompanyInfo_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericFromHour)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeductionMinutes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownToHour)).EndInit();
             this.groupBoxAdjustment.ResumeLayout(false);
             this.groupBoxAdjustment.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDeductionMinutes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -441,19 +395,17 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DateTimePicker dtpShiftEnd;
-        private System.Windows.Forms.DateTimePicker dtpShiftStart;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown numericUpDownToHour;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown numericUpDownDeductionMinutes;
-        private System.Windows.Forms.NumericUpDown numericFromHour;
         private System.Windows.Forms.GroupBox groupBoxAdjustment;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBoxApplyAdjustment;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dtpToHour;
+        private System.Windows.Forms.DateTimePicker dtpFromHour;
+        private System.Windows.Forms.DateTimePicker dtpShiftStart;
     }
 }
 

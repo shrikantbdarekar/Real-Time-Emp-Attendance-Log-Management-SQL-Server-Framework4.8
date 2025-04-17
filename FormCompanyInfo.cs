@@ -48,8 +48,8 @@ namespace CSEmployeeAttendance25
                 dtpShiftEnd.Value = DateTime.Today.Add(company.ShiftEnd);
 
                 checkBoxApplyAdjustment.Checked = company.ApplyTimeAdjustment;
-                numericFromHour.Value = company.FromHour;
-                numericUpDownToHour.Value = company.ToHour;
+                dtpFromHour.Value = DateTime.Today.Add(company.FromHour);
+                dtpToHour.Value = DateTime.Today.Add(company.ToHour);
                 numericUpDownDeductionMinutes.Value = company.DeductMinutes;
             }
         }
@@ -80,9 +80,9 @@ namespace CSEmployeeAttendance25
                 ShiftEnd = dtpShiftEnd.Value.TimeOfDay, // Convert DateTime to TimeSpan
 
                 ApplyTimeAdjustment = checkBoxApplyAdjustment.Checked,
-                FromHour = (decimal)numericFromHour.Value,
-                ToHour = (decimal)numericUpDownToHour.Value,
-                DeductMinutes = (decimal)numericUpDownDeductionMinutes.Value
+                FromHour = dtpFromHour.Value.TimeOfDay,
+                ToHour = dtpToHour.Value.TimeOfDay,
+                DeductMinutes = (int)numericUpDownDeductionMinutes.Value
             };
 
             // Save Data
@@ -90,6 +90,10 @@ namespace CSEmployeeAttendance25
             if (success)
             {
                 MessageBox.Show("Company info updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Update session values
+                Program.companyInfo = _companyHelper.GetCompanyInfo();
+
                 this.DialogResult = DialogResult.OK;
             }
             else

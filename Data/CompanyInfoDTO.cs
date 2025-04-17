@@ -22,9 +22,9 @@ namespace CSEmployeeAttendance25.Data
         public int PunchTimeSpan { get; set; }
 
         public bool ApplyTimeAdjustment { get; set; }
-        public decimal FromHour { get; set; }
-        public decimal ToHour { get; set; }
-        public decimal DeductMinutes { get; set; }
+        public TimeSpan FromHour { get; set; }
+        public TimeSpan ToHour { get; set; }
+        public int DeductMinutes { get; set; }
     }
 
 }

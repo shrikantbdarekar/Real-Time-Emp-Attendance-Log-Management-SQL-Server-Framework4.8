@@ -26,6 +26,7 @@ namespace CSEmployeeAttendance25.Data
             table.Columns.Add("DayHours", typeof(string));
             table.Columns.Add("HourSalary", typeof(decimal));
             table.Columns.Add("DaySalary", typeof(decimal));
+            table.Columns.Add("ActualDayHours", typeof(string));
 
             // Add rows from list to DataTable
             foreach (var item in list)
@@ -43,6 +44,7 @@ namespace CSEmployeeAttendance25.Data
                 row["DayHours"] = item.DayHours ?? (object)DBNull.Value;
                 row["HourSalary"] = item.HourSalary;
                 row["DaySalary"] = item.DaySalary;
+                row["ActualDayHours"] = item.ActualDayHours ?? (object)DBNull.Value;
 
                 table.Rows.Add(row);
             }

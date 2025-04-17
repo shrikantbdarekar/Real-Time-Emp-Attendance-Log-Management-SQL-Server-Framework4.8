@@ -122,6 +122,10 @@ namespace CSEmployeeAttendance25
             if (_biometricLogHelper.ApplyInOut(comboBoxBatchCode.SelectedValue.ToString()))
             {
                 MessageBox.Show("In/Out applied successfully!", "Process Complete");
+                dgvBiometricLogs.DataSource = null;
+                dgvOneEntry.DataSource = null;
+                dgvTwoPlusEntry.DataSource = null;
+                LoadBatchCode();
             }
             else
             {

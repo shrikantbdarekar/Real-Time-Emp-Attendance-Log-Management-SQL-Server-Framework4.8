@@ -42,9 +42,9 @@ namespace CSEmployeeAttendance25.Data
                 ShiftEnd = (TimeSpan)row["ShiftEnd"],
 
                 ApplyTimeAdjustment = Convert.ToBoolean(row["ApplyTimeAdjustment"]),
-                FromHour = Convert.ToDecimal(row["FromHour"]),
-                ToHour = Convert.ToDecimal(row["ToHour"]),
-                DeductMinutes = Convert.ToDecimal(row["DeductMinutes"])
+                FromHour = (TimeSpan)row["FromHour"],
+                ToHour = (TimeSpan)row["ToHour"],
+                DeductMinutes = Convert.ToInt32(row["DeductMinutes"])
             };
         }
 

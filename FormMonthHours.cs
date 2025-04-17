@@ -17,6 +17,7 @@ namespace CSEmployeeAttendance25
         private BiometricLogDBHelper _biometricLogHelper;
         private EmployeeDBHelper _employeeHelper;
 
+        List<EmployeeMonthSalaryDTO> EmployeeMonthSalaryData;
         List<BiometricLogDTOEmployeeMonthHour> BiometricLogMonthHourData;
         List<BiometricLogDTOWithEmployee> BiometricLogEmployeeData;
 
@@ -39,13 +40,7 @@ namespace CSEmployeeAttendance25
 
             dgvBiometricLogs.AutoGenerateColumns = false;
             dgvMonthHours.AutoGenerateColumns = false;
-
-           
-        }
-
-        private void FormCompanyInfo_Load(object sender, EventArgs e)
-        {
-
+            dgvMonthSalary.AutoGenerateColumns = false;
         }
 
         private void buttonLoadData_Click(object sender, EventArgs e)
@@ -53,21 +48,15 @@ namespace CSEmployeeAttendance25
             DateTime SD = dtpStartDate.Value;
             DateTime ED = dtpEndDate.Value;
 
-            //int.TryParse(comboBoxEmployee.SelectedValue.ToString(), out int empId);
             DateTime startDate = new DateTime(SD.Year, SD.Month, SD.Day, 0, 1, 0);
             DateTime endDate = new DateTime(ED.Year, ED.Month, ED.Day, 23, 59, 0);
 
-            comboBoxEmployee.DataSource = _employeeHelper.GetEmployeesDropdown(startDate, endDate);
-            comboBoxEmployee.DisplayMember = "EmployeeName";
-            comboBoxEmployee.ValueMember = "BMEmployeeId";
+            EmployeeMonthSalaryData = _biometricLogHelper.GetEmployeeMonthSalary(startDate, endDate);
+            dgvMonthSalary.DataSource = EmployeeMonthSalaryData;
 
             BiometricLogMonthHourData = _biometricLogHelper.GetBiometricLogsForEmployeeMonthHour(startDate, endDate);
-            dgvMonthHours.DataSource = BiometricLogMonthHourData;
-            tabPageDailyHours.Text = "#Month Hours (" + dgvMonthHours.RowCount + ")";
 
             BiometricLogEmployeeData = _biometricLogHelper.GetBiometricLogsForEmployeeMonthLog(startDate, endDate);
-            dgvBiometricLogs.DataSource = BiometricLogEmployeeData;
-            tabPageMonthLog.Text = "#Month Log (" + dgvBiometricLogs.RowCount + ")";
         }
 
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
@@ -75,40 +64,44 @@ namespace CSEmployeeAttendance25
             dtpEndDate.Value = dtpStartDate.Value.AddMonths(1).AddDays(-1);
         }
 
-        private void comboBoxEmployee_Enter(object sender, EventArgs e)
-        {
-            comboBoxEmployee.Height = 100;
-        }
-
-        private void comboBoxEmployee_Leave(object sender, EventArgs e)
-        {
-            comboBoxEmployee.Height = 26;
-        }
-
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void buttonFilterEmployee_Click(object sender, EventArgs e)
+        private void dgvMonthSalary_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dgcViewSalaryDetails.Index || e.ColumnIndex == dgcSalaryPrint.Index)
+            {
+                LoadSelectedEmployeeData();
+
+                if (e.ColumnIndex == dgcViewSalaryDetails.Index)
+                {
+                    tabControlMain.SelectedTab = tabPageDailyHours; // Ensure the tab is selected
+                    tabPageDailyHours.Focus(); // Set focus on the tab
+                }
+
+                if (e.ColumnIndex == dgcSalaryPrint.Index)
+                {
+                    FormReportViewer formReportViewer = new FormReportViewer((List<BiometricLogDTOEmployeeMonthHour>)dgvMonthHours.DataSource);
+                    formReportViewer.ShowDialog();
+                }
+            }
+        }
+
+        private void LoadSelectedEmployeeData()
         {
             if (BiometricLogEmployeeData != null && BiometricLogMonthHourData != null)
             {
-                if (comboBoxEmployee.SelectedValue == null)
-                {
-                    MessageBox.Show("Select employee!");
-                    return;
-                }
-
-                int.TryParse(comboBoxEmployee.SelectedValue.ToString(), out int bmEmployeeId);
+                int.TryParse(dgvMonthSalary.CurrentRow.Cells[dgcSalaryBMEmployeeId.Name].Value.ToString(), out int salaryBMEmployeeId);
 
                 dgvMonthHours.DataSource = BiometricLogMonthHourData
-                    .Where(x => x.BMEmployeeId == bmEmployeeId)
+                    .Where(x => x.BMEmployeeId == salaryBMEmployeeId)
                     .ToList();
                 tabPageDailyHours.Text = "#Month Hours (" + dgvMonthHours.RowCount + ")";
 
                 dgvBiometricLogs.DataSource = BiometricLogEmployeeData
-                    .Where(x => x.BMEmployeeId == bmEmployeeId)
+                    .Where(x => x.BMEmployeeId == salaryBMEmployeeId)
                     .ToList();
                 tabPageMonthLog.Text = "#Month Log (" + dgvBiometricLogs.RowCount + ")";
             }
@@ -119,10 +112,14 @@ namespace CSEmployeeAttendance25
             }
         }
 
-        private void buttonPrint_Click(object sender, EventArgs e)
+        private void buttonPrintAll_Click(object sender, EventArgs e)
         {
-            FormReportViewer formReportViewer = new FormReportViewer((List<BiometricLogDTOEmployeeMonthHour>)dgvMonthHours.DataSource);
-            formReportViewer.ShowDialog();
+            if (dgvMonthSalary.RowCount > 0 && BiometricLogMonthHourData.Count > 0)
+            {
+                FormReportViewer formReportViewer = new FormReportViewer((List<BiometricLogDTOEmployeeMonthHour>)BiometricLogMonthHourData
+                        .ToList());
+                formReportViewer.ShowDialog();
+            }
         }
     }
 }

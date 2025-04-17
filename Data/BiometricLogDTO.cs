@@ -64,4 +64,13 @@ namespace CSEmployeeAttendance25.Data
         public decimal DaySalary { get; set; }
     }
 
+    public class EmployeeMonthSalaryDTO
+    {
+        public long EmployeeId { get; set; }
+        public string EmployeeCode { get; set; }
+        public int BMEmployeeId { get; set; }
+        public string EmployeeName { get; set; }
+        public decimal MonthSalary { get; set; }
+    }
+
 }
